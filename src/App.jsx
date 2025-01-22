@@ -1,16 +1,15 @@
 import Home from './views/home/Home';
-import Details from './views/details/Details';
-import Navbar from './components/navbar/Navbar';
+import Details from './views/detail/Details';
+import { Route, Routes } from 'react-router-dom';
+// import Navbar from './components/';
 
 function App() {
-  const { pathname } = useLocation();
 
   return (
     <div>
-      <div>{(pathname !== '/login' && pathname !== '/') && <Navbar />}</div>
 
       <Routes>
-        <Route path='/' element={<Landing />} />
+        {/* <Route path='/' element={<Landing />} /> */}
         <Route path='/home' element={<Home />} />
         <Route path='/details/:id' element={<Details />} />
         {/* Otras rutas */}
@@ -20,4 +19,5 @@ function App() {
 }
 
 export default App;
+
 

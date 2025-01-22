@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getRentalById, updateRental } from '../../redux/actions';
+import { getRentalById, updateRental } from '../../redux/actions/actions';
 
 function Details() {
   const { id } = useParams();
