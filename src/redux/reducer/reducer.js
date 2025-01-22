@@ -9,7 +9,7 @@ const initialState = {
       case 'GET_RENTALS':
         return { ...state, rentals: action.payload };
       case 'GET_RENTAL_BY_ID':
-        return { ...state, rental: action.payload };
+        return { ...state, selectedRental: action.payload };
       case 'CREATE_RENTAL':
         return { ...state, rentals: [...state.rentals, action.payload] };
       case 'UPDATE_RENTAL':
