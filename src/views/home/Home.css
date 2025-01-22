@@ -1,0 +1,21 @@
+/* Fondo completo para días alquilados */
+.rented-day {
+  background-color: #FF6347 !important; /* Color rojo para días alquilados */
+  color: white !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Estilo para eventos disponibles (opcional) */
+.available-event {
+  background-color: #3174ad !important; /* Color azul para eventos normales */
+  color: white !important;
+  border-radius: 0 !important;
+}
+
+/* Fondo completo para eventos alquilados */
+.rented-event {
+  background-color: #FF6347 !important;
+  color: white !important;
+  border-radius: 0 !important; /* Elimina bordes redondeados */
+}

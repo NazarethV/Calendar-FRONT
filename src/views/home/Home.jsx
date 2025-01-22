@@ -2,27 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import Modal from 'react-modal';
+import './Home.css'; // Archivo CSS personalizado
 import { useDispatch, useSelector } from 'react-redux';
-import { getRentals, createRental, updateRental } from '../../redux/actions/actions';
+import { getRentals } from '../../redux/actions/actions';
+import { useNavigate } from 'react-router-dom';
 
 const localizer = momentLocalizer(moment);
-
-Modal.setAppElement('#root');
 
 function Home() {
   const dispatch = useDispatch();
   const rentals = useSelector((state) => state.rentals);
+  const navigate = useNavigate();
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [formData, setFormData] = useState({
-    tenantName: '',
-    startDate: '',
-    endDate: '',
-    price: '',
-  });
 
   useEffect(() => {
     dispatch(getRentals());
@@ -33,57 +25,67 @@ function Home() {
     start: new Date(rental.startDate),
     end: new Date(rental.endDate),
     id: rental.id,
+    isRented: true, // Identificador para estilos.
+    price: rental.price,
   }));
 
-  const handleSelectEvent = (event) => {
-    setSelectedEvent(event);
-    setFormData({
-      tenantName: event.title,
-      startDate: event.start.toISOString().split('T')[0],
-      endDate: event.end.toISOString().split('T')[0],
-      price: event.price || '',
-    });
-    setModalIsOpen(true);
+  // Aplicar estilos a los eventos
+  const eventStyleGetter = (event) => {
+    return {
+      className: event.isRented ? 'rented-event' : 'available-event', // Clase para alquilados.
+    };
   };
+
+  // Estilo a las celdas de los días
+  const dayStyleGetter = (date) => {
+    const rental = rentals.find(
+      (rental) =>
+        new Date(rental.startDate).toDateString() === date.toDateString() ||
+        new Date(rental.endDate).toDateString() === date.toDateString()
+    );
+    if (rental) {
+      return {
+        className: 'rented-day', // Si está alquilado, aplica esta clase
+      };
+    }
+    return {};
+  };
+
+  const handleSelectEvent = (event) => {
+    navigate(`/details/${event.id}`);
+  };
+
+  // const handleSelectSlot = (slotInfo) => {
+  //   setSelectedDate(slotInfo.start);
+  //   if (!slotInfo.start) return;
+  //   const selectedRental = rentals.find(
+  //     (rental) =>
+  //       new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
+  //   );
+  //   if (selectedRental) {
+  //     navigate(`/details/${selectedRental.id}`);
+  //   } else {
+  //     navigate('/new-rental'); // Si la fecha no está alquilada, navega a 'new-rental'.
+  //   }
+  // };
 
   const handleSelectSlot = (slotInfo) => {
     setSelectedDate(slotInfo.start);
-    setFormData({
-      tenantName: '',
-      startDate: slotInfo.start.toISOString().split('T')[0],
-      endDate: slotInfo.start.toISOString().split('T')[0],
-      price: '',
-    });
-    setSelectedEvent(null);
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setSelectedDate(null);
-    setSelectedEvent(null);
-    setFormData({
-      tenantName: '',
-      startDate: '',
-      endDate: '',
-      price: '',
-    });
-  };
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (selectedEvent) {
-      dispatch(updateRental(selectedEvent.id, formData));
+    if (!slotInfo.start) return;
+    
+    const selectedRental = rentals.find(
+      (rental) =>
+        new Date(rental.startDate).toDateString() === slotInfo.start.toDateString() ||
+        new Date(rental.endDate).toDateString() === slotInfo.start.toDateString()
+    );
+    
+    if (selectedRental) {
+      navigate(`/details/${selectedRental.id}`); // Si ya está alquilado, muestra los detalles
     } else {
-      dispatch(createRental(formData));
+      navigate('/new-rental'); // Si la fecha no está alquilada, navega a 'new-rental'.
     }
-    closeModal();
   };
+  
 
   return (
     <div>
@@ -97,56 +99,9 @@ function Home() {
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectSlot}
         selectable
+        eventPropGetter={eventStyleGetter} // Aplicar clases a los eventos.
+        dayPropGetter={dayStyleGetter} // Aplicar clases a las celdas del día.
       />
-
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Detalles del Evento"
-        style={{
-          content: {
-            width: '400px',
-            margin: 'auto',
-            padding: '20px',
-          },
-        }}
-      >
-        <form onSubmit={handleFormSubmit}>
-          <h2>{selectedEvent ? 'Editar Evento' : 'Agregar Evento'}</h2>
-          <label>Inquilino:</label>
-          <input
-            name="tenantName"
-            value={formData.tenantName}
-            onChange={handleFormChange}
-            required
-          />
-          <label>Fecha de inicio:</label>
-          <input
-            type="date"
-            name="startDate"
-            value={formData.startDate}
-            onChange={handleFormChange}
-            required
-          />
-          <label>Fecha de fin:</label>
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate}
-            onChange={handleFormChange}
-            required
-          />
-          <label>Precio:</label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleFormChange}
-          />
-          <button type="submit">{selectedEvent ? 'Guardar Cambios' : 'Agregar'}</button>
-        </form>
-        <button onClick={closeModal}>Cerrar</button>
-      </Modal>
     </div>
   );
 }
