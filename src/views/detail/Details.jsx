@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getRentalById } from '../../redux/actions/actions';
@@ -22,12 +22,13 @@ function Details() {
       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
       <p><strong>Precio:</strong> ${rental.price}</p>
-      <button onClick={() => navigate('/home')}>Volver al calendario</button>
+      <button onClick={() => navigate('/home')}>Volver al Calendario</button>
     </div>
   );
 }
 
 export default Details;
+
 
 
 

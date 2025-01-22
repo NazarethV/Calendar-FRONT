@@ -1,66 +1,67 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createRental } from '../redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
 
-function NewRental() {
-  const dispatch = useDispatch();
+function NewRental({ selectedDate }) {
+  const [tenantName, setTenantName] = useState('');
+  const [price, setPrice] = useState('');
+  const [startDate, setStartDate] = useState(selectedDate);
+  const [endDate, setEndDate] = useState(selectedDate);
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    tenantName: '',
-    startDate: '',
-    endDate: '',
-    price: '',
-  });
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/'); // Redirect to calendar after saving rental
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createRental(formData));
-    navigate('/home'); // Redirige al calendario después de guardar el alquiler.
+  const handleBackToCalendar = () => {
+    navigate('/home'); // Redirect to calendar
   };
 
   return (
-    <div>
-      <h1>Agregar Nuevo Alquiler</h1>
-      <form onSubmit={handleFormSubmit}>
-        <label>Inquilino:</label>
-        <input
-          name="tenantName"
-          value={formData.tenantName}
-          onChange={handleFormChange}
-          required
-        />
-        <label>Fecha de inicio:</label>
-        <input
-          type="date"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleFormChange}
-          required
-        />
-        <label>Fecha de fin:</label>
-        <input
-          type="date"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleFormChange}
-          required
-        />
-        <label>Precio:</label>
-        <input
-          type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleFormChange}
-        />
-        <button type="submit">Guardar</button>
+    <div className="new-rental-form">
+      <h2>Agregar Alquiler</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Nombre del inquilino:
+          <input
+            type="text"
+            value={tenantName}
+            onChange={(e) => setTenantName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Precio:
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Fecha de inicio:
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Fecha de fin:
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit">Guardar Alquiler</button>
       </form>
+      <button onClick={handleBackToCalendar} className="back-to-calendar-btn">
+        ← Volver al Calendario
+      </button>
     </div>
   );
 }
