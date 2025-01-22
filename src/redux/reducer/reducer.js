@@ -1,5 +1,6 @@
 const initialState = {
     rentals: [],
+    rental: null,
     selectedRental: null,
   };
   
@@ -8,7 +9,9 @@ const initialState = {
       case 'GET_RENTALS':
         return { ...state, rentals: action.payload };
       case 'GET_RENTAL_BY_ID':
-        return { ...state, selectedRental: action.payload };
+        return { ...state, rental: action.payload };
+      case 'CREATE_RENTAL':
+        return { ...state, rentals: [...state.rentals, action.payload] };
       case 'UPDATE_RENTAL':
         return {
           ...state,
@@ -16,6 +19,12 @@ const initialState = {
             rental.id === action.payload.id ? action.payload : rental
           ),
         };
+      case 'DELETE_RENTAL':
+        return {
+          ...state,
+          rentals: state.rentals.filter((rental) => rental.id !== action.payload),
+        };
+        
       default:
         return state;
     }
