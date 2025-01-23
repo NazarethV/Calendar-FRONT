@@ -11,8 +11,12 @@ function EditRental() {
   
   const [tenantName, setTenantName] = useState('');
   const [price, setPrice] = useState('');
+  const [deposit, setDeposit] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [checkInTime, setCheckInTime] = useState('');
+  const [checkOutTime, setCheckOutTime] = useState('');
 
   useEffect(() => {
     dispatch(getRentalById(id));
@@ -22,16 +26,20 @@ function EditRental() {
     if (rental) {
       setTenantName(rental.tenantName);
       setPrice(rental.price);
+      setDeposit(rental.deposit);
+      setPhoneNumber(rental.phoneNumber);
       setStartDate(rental.startDate);
       setEndDate(rental.endDate);
+      setCheckInTime(rental.checkInTime);
+      setCheckOutTime(rental.checkOutTime);
     }
   }, [rental]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedRental = { tenantName, price, startDate, endDate };
+    const updatedRental = { tenantName, price, deposit, phoneNumber, startDate, endDate, checkInTime, checkOutTime };
     dispatch(updateRental(id, updatedRental));
-    navigate('/home'); // Redirigir a la página principal después de actualizar
+    navigate('/home'); 
   };
 
   if (!rental) return <div>Cargando...</div>;
@@ -59,6 +67,22 @@ function EditRental() {
           />
         </label>
         <label>
+          Seña (opcional):
+          <input
+            type="number"
+            value={deposit}
+            onChange={(e) => setDeposit(e.target.value)}
+          />
+        </label>
+        <label>
+          Número de celular (opcional):
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </label>
+        <label>
           Fecha de inicio:
           <input
             type="date"
@@ -74,6 +98,22 @@ function EditRental() {
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
+          />
+        </label>
+        <label>
+          Hora de entrada (opcional):
+          <input
+            type="time"
+            value={checkInTime}
+            onChange={(e) => setCheckInTime(e.target.value)}
+          />
+        </label>
+        <label>
+          Hora de salida (opcional):
+          <input
+            type="time"
+            value={checkOutTime}
+            onChange={(e) => setCheckOutTime(e.target.value)}
           />
         </label>
         <button type="submit">Actualizar Alquiler</button>

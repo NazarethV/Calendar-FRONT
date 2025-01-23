@@ -32,6 +32,10 @@ function Details() {
       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
       <p><strong>Precio:</strong> ${rental.price}</p>
+      <p><strong>Seña:</strong> ${rental.deposit || 'No especificado'}</p>
+      <p><strong>Número de celular:</strong> {rental.phoneNumber || 'No especificado'}</p>
+      <p><strong>Hora de entrada:</strong> {rental.checkInTime || 'No especificado'}</p>
+      <p><strong>Hora de salida:</strong> {rental.checkOutTime || 'No especificado'}</p>
       
       <button onClick={() => navigate(`/edit-rental/${id}`)} className="edit-btn">
         Editar información del alquiler
