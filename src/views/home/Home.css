@@ -57,9 +57,14 @@
 
 
 .rented-day {
-  background-color: #FFA07A; /* Fondo para las fechas alquiladas */
+  background-color: #dded00; /* Fondo para las fechas alquiladas */
   color: white; /* Color de texto para mejor contraste */
-  border: 1px solid #FF6347; /* Opcional: borde para distinguir */
+  border: 1px solid #e8be00; /* Opcional: borde para distinguir */
+}
+
+.rbc-event {
+  color: #17402b;
+  background-color: #dded00 !important; /* Sobrescribir azul en eventos */
 }
 
 

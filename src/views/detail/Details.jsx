@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRentalById } from '../../redux/actions/actions';
+import { deleteRental, getRentalById } from '../../redux/actions/actions';
 
 import './Details.css';
 
@@ -15,6 +15,14 @@ function Details() {
     dispatch(getRentalById(id));
   }, [dispatch, id]);
 
+
+  const handleDelete = () => {
+    if (window.confirm('¿Estás seguro de que deseas eliminar este alquiler?')) {
+      dispatch(deleteRental(id));
+      navigate('/home'); // Redirigir a la página principal después de eliminar
+    }
+  };
+
   if (!rental) return <div>Cargando detalles...</div>;
 
   return (
@@ -24,6 +32,15 @@ function Details() {
       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
       <p><strong>Precio:</strong> ${rental.price}</p>
+      
+      <button onClick={() => navigate(`/edit-rental/${id}`)} className="edit-btn">
+        Editar información del alquiler
+      </button>
+
+      <button onClick={handleDelete} className="delete-btn">
+        Eliminar alquiler
+      </button>
+      
       <button onClick={() => navigate('/home')} className="back-btn">
         Volver al Calendario
       </button>
