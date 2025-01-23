@@ -5,27 +5,27 @@
   background-color: #F1F1F1;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
+  margin: 10px auto; /* Centrar en pantallas más anchas */
 }
 
-/* Ajustes de altura para pantallas pequeñas */
+/* Adjustments for small screens */
 .react-big-calendar {
   border-radius: 10px;
   overflow: hidden;
-  height: auto; /* Cambiado a auto para adaptarse mejor a móviles */
+  height: auto; /* Ensure proper height on smaller devices */
 }
 
-/* Ajuste de la cabecera */
 .rbc-header {
   background-color: #83AF80;
   color: white;
   font-weight: bold;
-  font-size: 14px; /* Fuente más pequeña en móviles */
+  font-size: 14px;
 }
 
 .rbc-event {
   border-radius: 5px;
-  padding: 5px; /* Reducción de padding */
+  padding: 5px;
+  font-size: 12px;
 }
 
 .rbc-day-bg {
@@ -36,36 +36,87 @@
   background-color: #CFD3A5;
 }
 
+.rental-item {
+  background-color: white;
+  border-radius: 10px;
+  margin: 5px 0;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+button {
+  display: block;
+  margin: 5px auto;
+  padding: 8px 12px;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #83AF80;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6f946b;
+}
+
+/* Media queries for small screens */
 @media screen and (max-width: 768px) {
   .calendar-container {
     padding: 5px;
   }
 
   .react-big-calendar {
-    font-size: 12px; /* Reducir tamaño de fuente */
-  }
-
-  /* Asegura que el calendario sea completamente visible en pantallas pequeñas */
-  .rbc-day-bg {
-    padding: 2px; /* Reducir tamaño de las celdas de día */
+    font-size: 12px;
+    height: auto;
   }
 
   h1 {
-    font-size: 20px; /* Reducir tamaño del título */
+    font-size: 20px;
+  }
+
+  .rental-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rental-item {
+    font-size: 12px;
   }
 }
 
+/* Further adjustments for very small screens (e.g., Samsung A22) */
+@media screen and (max-width: 480px) {
+  .calendar-container {
+    padding: 5px;
+  }
 
-.rented-day {
-  background-color: #dded00; /* Fondo para las fechas alquiladas */
-  color: white; /* Color de texto para mejor contraste */
-  border: 1px solid #e8be00; /* Opcional: borde para distinguir */
+  .react-big-calendar {
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 10px;
+  }
 }
+
 
 .rbc-event {
   color: #17402b;
   background-color: #dded00 !important; /* Sobrescribir azul en eventos */
 }
+
+
+.rbc-day-bg.rented-day {
+  background-color: #dded00 !important; /* Fondo de días alquilados */
+}
+
 
 
 /* Fondo completo para días alquilados */

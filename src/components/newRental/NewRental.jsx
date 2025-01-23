@@ -1,26 +1,47 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createRental } from '../../redux/actions/actions';
 
-import './NewRental.css'
+import './NewRental.css';
 
 function NewRental({ selectedDate }) {
   const [tenantName, setTenantName] = useState('');
   const [price, setPrice] = useState('');
   const [deposit, setDeposit] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [startDate, setStartDate] = useState(selectedDate);
-  const [endDate, setEndDate] = useState(selectedDate);
+  const [startDate, setStartDate] = useState(selectedDate || '');
+  const [endDate, setEndDate] = useState(selectedDate || '');
   const [checkInTime, setCheckInTime] = useState('');
   const [checkOutTime, setCheckOutTime] = useState('');
+  
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Añade esto
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/home'); // Redirect to calendar after saving rental
+
+    // Crea el objeto rental con los datos del formulario
+    const rental = {
+      tenantName,
+      price: parseFloat(price), // Convierte a número
+      deposit: deposit ? parseFloat(deposit) : null,
+      phoneNumber,
+      startDate,
+      endDate,
+      checkInTime,
+      checkOutTime,
+    };
+
+    // Despacha la acción para crear el alquiler
+    dispatch(createRental(rental));
+
+    // Redirige al calendario después de guardar
+    navigate('/home');
   };
 
   const handleBackToCalendar = () => {
-    navigate('/home'); // Redirect to calendar
+    navigate('/home');
   };
 
   return (
@@ -65,8 +86,8 @@ function NewRental({ selectedDate }) {
           Fecha de inicio:
           <input
             type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target .value)}
+            value={startDate || ''}
+            onChange={(e) => setStartDate(e.target.value)}
             required
           />
         </label>
@@ -74,7 +95,7 @@ function NewRental({ selectedDate }) {
           Fecha de fin:
           <input
             type="date"
-            value={endDate}
+            value={endDate || ''}
             onChange={(e) => setEndDate(e.target.value)}
             required
           />
