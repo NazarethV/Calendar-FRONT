@@ -54,6 +54,19 @@ function Home() {
     };
   };
 
+  // Estilos para los días del calendario
+  const dayPropGetter = (date) => {
+    const isRentedDay = events.some(
+      (event) =>
+        date >= new Date(event.start).setHours(0, 0, 0, 0) &&
+        date <= new Date(event.end).setHours(23, 59, 59, 999)
+    );
+
+    return {
+      className: isRentedDay ? 'rented-day' : '', // Aplica la clase si es un día alquilado
+    };
+  };
+
   // Función para manejar la selección de un evento (alquiler)
   const handleSelectEvent = (event) => {
     navigate(`/details/${event.id}`);  // Navegar a los detalles del alquiler
@@ -117,6 +130,7 @@ function Home() {
           onSelectSlot={handleSelectSlot}
           selectable
           eventPropGetter={eventStyleGetter}
+          dayPropGetter={dayPropGetter} // Nueva línea para aplicar estilos a días específicos
           views={['month', 'agenda']}
           defaultView="month"
           messages={messages}
@@ -138,9 +152,6 @@ function Home() {
 }
 
 export default Home;
-
-
-
 
 
 
