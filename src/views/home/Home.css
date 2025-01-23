@@ -1,21 +1,86 @@
-/* Fondo completo para días alquilados */
+/* General calendar container adjustments */
+.calendar-container {
+  max-width: 100%;
+  padding: 10px;
+  background-color: #F1F1F1;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+}
+
+/* Ajustes de altura para pantallas pequeñas */
+.react-big-calendar {
+  border-radius: 10px;
+  overflow: hidden;
+  height: auto; /* Cambiado a auto para adaptarse mejor a móviles */
+}
+
+/* Ajuste de la cabecera */
+.rbc-header {
+  background-color: #83AF80;
+  color: white;
+  font-weight: bold;
+  font-size: 14px; /* Fuente más pequeña en móviles */
+}
+
+.rbc-event {
+  border-radius: 5px;
+  padding: 5px; /* Reducción de padding */
+}
+
+.rbc-day-bg {
+  background-color: #B0D1A3;
+}
+
+.rbc-off-range-bg {
+  background-color: #CFD3A5;
+}
+
+@media screen and (max-width: 768px) {
+  .calendar-container {
+    padding: 5px;
+  }
+
+  .react-big-calendar {
+    font-size: 12px; /* Reducir tamaño de fuente */
+  }
+
+  /* Asegura que el calendario sea completamente visible en pantallas pequeñas */
+  .rbc-day-bg {
+    padding: 2px; /* Reducir tamaño de las celdas de día */
+  }
+
+  h1 {
+    font-size: 20px; /* Reducir tamaño del título */
+  }
+}
+
+
 .rented-day {
-  background-color: #FF6347 !important; /* Color rojo para días alquilados */
-  color: white !important;
+  background-color: #FFA07A; /* Fondo para las fechas alquiladas */
+  color: white; /* Color de texto para mejor contraste */
+  border: 1px solid #FF6347; /* Opcional: borde para distinguir */
+}
+
+
+/* Fondo completo para días alquilados */
+/* .rented-day { */
+  /* background-color: #FF6347 !important; Color rojo para días alquilados */
+  /* color: white !important;
   height: 100% !important;
   width: 100% !important;
-}
+} */
 
 /* Estilo para eventos disponibles (opcional) */
-.available-event {
-  background-color: #3174ad !important; /* Color azul para eventos normales */
-  color: white !important;
+/* .available-event {
+  background-color: #3174ad !important; Color azul para eventos normales */
+  /* color: white !important;
   border-radius: 0 !important;
-}
+} */
 
 /* Fondo completo para eventos alquilados */
-.rented-event {
+/* .rented-event {
   background-color: #FF6347 !important;
-  color: white !important;
-  border-radius: 0 !important; /* Elimina bordes redondeados */
-}
+  color: white !important; */
+  /* border-radius: 0 !important; /* Elimina bordes redondeados */
+/*} */

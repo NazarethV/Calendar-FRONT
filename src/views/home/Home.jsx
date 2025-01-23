@@ -99,7 +99,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="calendar-container">
       <h1>Calendario de Alquileres</h1>
       <Calendar
         localizer={localizer} // Usamos el nuevo localizador basado en date-fns
@@ -122,6 +122,7 @@ function Home() {
 }
 
 export default Home;
+
 
 
 

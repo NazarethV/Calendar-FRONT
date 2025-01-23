@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getRentalById } from '../../redux/actions/actions';
 
+import './Details.css';
+
 function Details() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -16,13 +18,15 @@ function Details() {
   if (!rental) return <div>Cargando detalles...</div>;
 
   return (
-    <div>
+    <div className="details-container">
       <h1>Detalles del Alquiler</h1>
       <p><strong>Inquilino:</strong> {rental.tenantName}</p>
       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
       <p><strong>Precio:</strong> ${rental.price}</p>
-      <button onClick={() => navigate('/home')}>Volver al Calendario</button>
+      <button onClick={() => navigate('/home')} className="back-btn">
+        Volver al Calendario
+      </button>
     </div>
   );
 }

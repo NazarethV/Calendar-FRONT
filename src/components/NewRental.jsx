@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import './NewRental.css'
+
 function NewRental({ selectedDate }) {
   const [tenantName, setTenantName] = useState('');
   const [price, setPrice] = useState('');
@@ -10,7 +12,7 @@ function NewRental({ selectedDate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/'); // Redirect to calendar after saving rental
+    navigate('/home'); // Redirect to calendar after saving rental
   };
 
   const handleBackToCalendar = () => {
@@ -67,3 +69,4 @@ function NewRental({ selectedDate }) {
 }
 
 export default NewRental;
+

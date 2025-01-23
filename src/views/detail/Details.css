@@ -1,0 +1,64 @@
+/* Estilos básicos para Details */
+.details-container {
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 20px auto;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+h1 {
+  color: #628441; /* Color verde para los títulos */
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+button {
+  background-color: #83AF80; /* Verde para botones */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #628441; /* Color verde más oscuro al hacer hover */
+}
+
+/* Estilo responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .details-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 14px;
+  }
+}
+
+
