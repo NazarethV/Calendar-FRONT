@@ -6,8 +6,12 @@ import './NewRental.css'
 function NewRental({ selectedDate }) {
   const [tenantName, setTenantName] = useState('');
   const [price, setPrice] = useState('');
+  const [deposit, setDeposit] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [startDate, setStartDate] = useState(selectedDate);
   const [endDate, setEndDate] = useState(selectedDate);
+  const [checkInTime, setCheckInTime] = useState('');
+  const [checkOutTime, setCheckOutTime] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -42,11 +46,27 @@ function NewRental({ selectedDate }) {
           />
         </label>
         <label>
+          Seña (opcional):
+          <input
+            type="number"
+            value={deposit}
+            onChange={(e) => setDeposit(e.target.value)}
+          />
+        </label>
+        <label>
+          Número de celular (opcional):
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </label>
+        <label>
           Fecha de inicio:
           <input
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={(e) => setStartDate(e.target .value)}
             required
           />
         </label>
@@ -57,6 +77,22 @@ function NewRental({ selectedDate }) {
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
+          />
+        </label>
+        <label>
+          Hora de entrada (opcional):
+          <input
+            type="time"
+            value={checkInTime}
+            onChange={(e) => setCheckInTime(e.target.value)}
+          />
+        </label>
+        <label>
+          Hora de salida (opcional):
+          <input
+            type="time"
+            value={checkOutTime}
+            onChange={(e) => setCheckOutTime(e.target.value)}
           />
         </label>
         <button type="submit">Guardar Alquiler</button>
