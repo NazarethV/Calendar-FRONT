@@ -3,10 +3,10 @@ import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './Home.css';  // Estilos específicos de este componente
+import './Home.css'; // Estilos específicos de este componente
 import { useDispatch, useSelector } from 'react-redux';
-import { getRentals } from '../../redux/actions/actions';  // Acción para obtener alquileres
-import { useNavigate } from 'react-router-dom';  // Para navegar a la vista de detalles del alquiler
+import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
+import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
 
 // Localizador para fecha en español
 const locales = {
@@ -23,28 +23,28 @@ const localizer = dateFnsLocalizer({
 
 function Home() {
   const dispatch = useDispatch();
-  const rentals = useSelector((state) => state.rentals);  // Obtener los alquileres desde el estado
+  const rentals = useSelector((state) => state.rentals); // Obtener los alquileres desde el estado
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getRentals());  // Obtener los alquileres cuando se cargue el componente
+    dispatch(getRentals()); // Obtener los alquileres cuando se cargue el componente
   }, [dispatch]);
 
   // Ordenar los alquileres por fecha de inicio (de más cercano a más lejano)
   const sortedRentals = rentals.sort((a, b) => {
     const dateA = new Date(a.startDate);
     const dateB = new Date(b.startDate);
-    return dateA - dateB;  // Ordenar de menor a mayor fecha
+    return dateA - dateB; // Ordenar de menor a mayor fecha
   });
 
   // Convertir los alquileres en un formato compatible con el calendario
   const events = sortedRentals.map((rental) => ({
-    title: rental.tenantName,  // Nombre del inquilino
-    start: new Date(rental.startDate),  // Fecha de inicio
-    end: new Date(rental.endDate),  // Fecha de fin
-    id: rental.id,  // ID del alquiler
-    isRented: true,  // Indicar que está alquilado
-    price: rental.price,  // Precio del alquiler
+    title: rental.tenantName, // Nombre del inquilino
+    start: new Date(rental.startDate), // Fecha de inicio
+    end: new Date(rental.endDate), // Fecha de fin
+    id: rental.id, // ID del alquiler
+    isRented: true, // Indicar que está alquilado
+    price: rental.price, // Precio del alquiler
   }));
 
   // Estilos de los eventos del calendario
@@ -69,7 +69,7 @@ function Home() {
 
   // Función para manejar la selección de un evento (alquiler)
   const handleSelectEvent = (event) => {
-    navigate(`/details/${event.id}`);  // Navegar a los detalles del alquiler
+    navigate(`/details/${event.id}`); // Navegar a los detalles del alquiler
   };
 
   // Función para manejar la selección de una fecha o espacio en el calendario
@@ -79,9 +79,9 @@ function Home() {
         new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
     );
     if (selectedRental) {
-      navigate(`/details/${selectedRental.id}`);  // Navegar a los detalles del alquiler si se encuentra
+      navigate(`/details/${selectedRental.id}`); // Navegar a los detalles del alquiler si se encuentra
     } else {
-      navigate('/new-rental');  // Si no hay alquiler, ir a la creación de uno nuevo
+      navigate('/new-rental'); // Si no hay alquiler, ir a la creación de uno nuevo
     }
   };
 
@@ -90,7 +90,7 @@ function Home() {
     next: 'Mes Siguiente',
     previous: 'Mes Anterior',
     today: 'Hoy',
-    month: 'Mes',
+    month: 'Calendario',
     week: 'Semana',
     day: 'Día',
     agenda: 'Agenda',
@@ -130,7 +130,7 @@ function Home() {
           onSelectSlot={handleSelectSlot}
           selectable
           eventPropGetter={eventStyleGetter}
-          dayPropGetter={dayPropGetter} // Nueva línea para aplicar estilos a días específicos
+          dayPropGetter={dayPropGetter}
           views={['month', 'agenda']}
           defaultView="month"
           messages={messages}
@@ -152,8 +152,6 @@ function Home() {
 }
 
 export default Home;
-
-
 
 
 

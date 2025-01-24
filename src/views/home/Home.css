@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+
+
 /* General calendar container adjustments */
 .calendar-container {
   max-width: 100%;
@@ -116,6 +120,57 @@ button:hover {
 .rbc-day-bg.rented-day {
   background-color: #dded00 !important; /* Fondo de días alquilados */
 }
+
+.rbc-toolbar-label {
+  font-size: 2rem; /* Aumenta el tamaño de la fuente */
+  font-family: 'Poppins', sans-serif; /* Cambia la fuente (opcional) */
+  font-weight: bold; /* Hace que el texto sea más llamativo */
+  color: #2E7D32; /* Cambia el color a un verde atractivo */
+  text-transform: capitalize; /* Opcional: Capitaliza el texto */
+}
+
+/* Contenedor principal de la barra de herramientas */
+.rbc-toolbar {
+  display: flex;
+  flex-direction: column; /* Apila los elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  gap: 10px; /* Espacio entre filas */
+  margin-bottom: 10px; /* Espacio debajo de la barra */
+}
+
+/* Estilo del mes/año */
+.rbc-toolbar-label {
+  font-size: 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  color: #2E7D32;
+  text-align: center;
+}
+
+/* Contenedor para los botones Hoy, Mes anterior y Mes siguiente */
+.rbc-btn-group {
+  display: flex;
+  justify-content: center; /* Centra el grupo de botones */
+  gap: 20px; /* Espacio entre botones */
+  margin-top: 10px; /* Espacio adicional debajo del mes/año */
+}
+
+/* Cambiar el orden de los botones en la barra de herramientas */
+.rbc-toolbar .rbc-btn-group button:nth-child(1) {
+  order: 2; /* Hoy */
+}
+
+.rbc-toolbar .rbc-btn-group button:nth-child(2) {
+  order: 1; /* Mes anterior */
+}
+
+.rbc-toolbar .rbc-btn-group button:nth-child(3) {
+  order: 3; /* Mes siguiente */
+}
+
+
+
+
 
 
 
