@@ -98,7 +98,7 @@ function Home() {
     time: 'Hora',
     event: 'Persona',
     allDay: 'Todo el día',
-    noEventsInRange: 'No hay días alquilados.',
+    noEventsInRange: 'No hay días alquilados en estas fechas.',
     weekLabel: 'Semana',
     dayLabel: 'Día',
     monthLabel: 'Mes',
@@ -125,7 +125,7 @@ function Home() {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{ height: 500 }} // Manteniendo la altura original
           onSelectEvent={handleSelectEvent}
           onSelectSlot={handleSelectSlot}
           selectable
@@ -152,6 +152,7 @@ function Home() {
 }
 
 export default Home;
+
 
 
 

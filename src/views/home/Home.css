@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-
-
 /* General calendar container adjustments */
 .calendar-container {
   max-width: 100%;
@@ -9,14 +7,15 @@
   background-color: #F1F1F1;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 10px auto; /* Centrar en pantallas más anchas */
+  margin: 10px auto;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Adjustments for small screens */
+/* Ajustes para pantallas pequeñas */
 .react-big-calendar {
   border-radius: 10px;
   overflow: hidden;
-  height: auto; /* Ensure proper height on smaller devices */
+  height: auto;
 }
 
 .rbc-header {
@@ -65,7 +64,7 @@ button:hover {
   background-color: #6f946b;
 }
 
-/* Media queries for small screens */
+/* Media queries para pantallas pequeñas */
 @media screen and (max-width: 768px) {
   .calendar-container {
     padding: 5px;
@@ -91,7 +90,7 @@ button:hover {
   }
 }
 
-/* Further adjustments for very small screens (e.g., Samsung A22) */
+/* Ajustes para pantallas muy pequeñas (e.g., Samsung A22) */
 @media screen and (max-width: 480px) {
   .calendar-container {
     padding: 5px;
@@ -110,68 +109,79 @@ button:hover {
   }
 }
 
-
+/* Estilos de eventos */
 .rbc-event {
   color: #17402b;
   background-color: #dded00 !important; /* Sobrescribir azul en eventos */
 }
 
-
 .rbc-day-bg.rented-day {
   background-color: #dded00 !important; /* Fondo de días alquilados */
 }
 
-.rbc-toolbar-label {
-  font-size: 2rem; /* Aumenta el tamaño de la fuente */
-  font-family: 'Poppins', sans-serif; /* Cambia la fuente (opcional) */
-  font-weight: bold; /* Hace que el texto sea más llamativo */
-  color: #2E7D32; /* Cambia el color a un verde atractivo */
-  text-transform: capitalize; /* Opcional: Capitaliza el texto */
-}
-
-/* Contenedor principal de la barra de herramientas */
+/* Barra de herramientas */
 .rbc-toolbar {
   display: flex;
-  flex-direction: column; /* Apila los elementos en columna */
-  align-items: center; /* Centra los elementos horizontalmente */
-  gap: 10px; /* Espacio entre filas */
-  margin-bottom: 10px; /* Espacio debajo de la barra */
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-/* Estilo del mes/año */
 .rbc-toolbar-label {
   font-size: 2rem;
-  font-family: 'Poppins', sans-serif;
   font-weight: bold;
   color: #2E7D32;
   text-align: center;
 }
 
-/* Contenedor para los botones Hoy, Mes anterior y Mes siguiente */
 .rbc-btn-group {
   display: flex;
-  justify-content: center; /* Centra el grupo de botones */
-  gap: 20px; /* Espacio entre botones */
-  margin-top: 10px; /* Espacio adicional debajo del mes/año */
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
 }
 
-/* Cambiar el orden de los botones en la barra de herramientas */
 .rbc-toolbar .rbc-btn-group button:nth-child(1) {
-  order: 2; /* Hoy */
+  order: 2;
 }
 
 .rbc-toolbar .rbc-btn-group button:nth-child(2) {
-  order: 1; /* Mes anterior */
+  order: 1;
 }
 
 .rbc-toolbar .rbc-btn-group button:nth-child(3) {
-  order: 3; /* Mes siguiente */
+  order: 3;
 }
 
 
+/* Estilo para el título "Todos los alquileres" */
+.rental-list h2 {
+  font-family: 'Poppins', sans-serif; /* Fuente más elegante */
+  font-size: 2.5rem; /* Aumentar el tamaño del texto */
+  font-weight: 600; /* Hacerlo en negrita */
+  color: #2E7D32; /* Color verde para mantener la armonía */
+  text-align: center; /* Centrar el texto */
+  text-transform: uppercase; /* Hacerlo en mayúsculas para mayor énfasis */
+  letter-spacing: 1px; /* Espaciado entre letras para hacerlo más elegante */
+  margin-bottom: 20px; /* Espacio debajo del título */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Agregar sombra para un efecto más llamativo */
+}
 
+/* Ajustes en la vista móvil */
+@media screen and (max-width: 768px) {
+  .rental-list h2 {
+    font-size: 2rem; /* Ajustar tamaño en pantallas más pequeñas */
+    text-transform: none; /* Dejar en minúsculas en móviles si es necesario */
+  }
+}
 
-
+/* Para pantallas muy pequeñas (ej. Samsung A22) */
+@media screen and (max-width: 480px) {
+  .rental-list h2 {
+    font-size: 1.5rem; /* Ajustar aún más el tamaño */
+  }
+}
 
 
 /* Fondo completo para días alquilados */

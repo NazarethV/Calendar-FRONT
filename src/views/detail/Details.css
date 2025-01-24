@@ -1,3 +1,6 @@
+/* Importar fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans:wght@400;600&family=Roboto:wght@700&display=swap');
+
 /* Estilos básicos para Details */
 .details-container {
   padding: 20px;
@@ -6,38 +9,79 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   margin: 20px auto;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Open Sans', sans-serif; /* Cuerpo con Open Sans */
   color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
   color: #628441; /* Color verde para los títulos */
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif; /* Título con Poppins */
+  font-weight: 700;
   text-align: center;
+}
+
+.subtitle {
+  font-weight: 700; /* Negrita */
+  color: #333; /* Negro */
+  font-family: 'Roboto', sans-serif; /* Subtítulos con Roboto */
 }
 
 p {
   font-size: 18px;
   margin-bottom: 10px;
   text-align: justify;
+  max-width: 600px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif; /* Cuerpo con Open Sans */
 }
 
+/* Botones */
 button {
-  background-color: #83AF80; /* Verde para botones */
-  color: white;
-  border: none;
+  font-size: 16px;
+  width: 100%;
   padding: 12px 24px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  margin-top: 20px;
+  margin-top: 30px; /* Mayor separación entre el texto y los botones */
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #628441; /* Color verde más oscuro al hacer hover */
+/* Botón para editar */
+.edit-btn {
+  background-color: #4CAF50; /* Verde más fuerte */
+  color: white;
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #388E3C; /* Verde más oscuro al hacer hover */
+}
+
+/* Botón para eliminar */
+.delete-btn {
+  background-color: #E53935; /* Rojo */
+  color: white;
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: #B71C1C; /* Rojo más oscuro al hacer hover */
+}
+
+/* Botón para volver */
+.back-btn {
+  background-color: #83AF80; /* Verde estándar */
+  color: white;
+  border: none;
+}
+
+.back-btn:hover {
+  background-color: #628441; /* Verde más oscuro al hacer hover */
 }
 
 /* Estilo responsivo para pantallas pequeñas */
@@ -48,7 +92,7 @@ button:hover {
   }
 
   h1 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   p {
@@ -60,5 +104,4 @@ button:hover {
     padding: 14px;
   }
 }
-
 
