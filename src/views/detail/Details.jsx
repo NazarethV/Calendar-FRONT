@@ -27,26 +27,26 @@ function Details() {
   return (
     <div className="details-container">
       <h1>Detalles del Alquiler</h1>
-      <p><strong>Inquilino:</strong> {rental.tenantName}</p>
+      <p><span className="subtitle">Inquilino:</span> {rental.tenantName}</p>
       <p>
-        <strong>Fecha de inicio:</strong>{' '}
+        <span className="subtitle">Fecha de inicio:</span>{' '}
         {new Date(rental.startDate).toLocaleDateString('es-ES')}
       </p>
       <p>
-        <strong>Fecha de fin:</strong>{' '}
+        <span className="subtitle">Fecha de fin:</span>{' '}
         {new Date(rental.endDate).toLocaleDateString('es-ES')}
       </p>
-      <p><strong>Precio:</strong> ${rental.price}</p>
-      <p><strong>Seña:</strong> ${rental.deposit || 'No especificado'}</p>
-      <p><strong>Número de celular:</strong> {rental.phoneNumber || 'No especificado'}</p>
+      <p><span className="subtitle">Precio:</span> ${rental.price}</p>
+      <p><span className="subtitle">Seña:</span> ${rental.deposit || 'No especificado'}</p>
+      <p><span className="subtitle">Número de celular:</span> {rental.phoneNumber || 'No especificado'}</p>
       <p>
-        <strong>Hora de entrada:</strong>{' '}
+        <span className="subtitle">Hora de entrada:</span>{' '}
         {rental.checkInTime
           ? rental.checkInTime.slice(0, 5) // Extrae solo "hh:mm" del formato "hh:mm:ss"
           : 'No especificado'}
       </p>
       <p>
-        <strong>Hora de salida:</strong>{' '}
+        <span className="subtitle">Hora de salida:</span>{' '}
         {rental.checkOutTime
           ? rental.checkOutTime.slice(0, 5) // Extrae solo "hh:mm" del formato "hh:mm:ss"
           : 'No especificado'}
@@ -68,7 +68,5 @@ function Details() {
 }
 
 export default Details;
-
-
 
 

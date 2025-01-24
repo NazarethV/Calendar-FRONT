@@ -6,23 +6,28 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   margin: 20px auto;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif; /* Cambié la fuente a Poppins para mejor coherencia */
 }
 
+/* Estilo para el título */
 h2 {
   color: #628441; /* Verde para los títulos */
-  font-size: 24px;
+  font-size: 2rem; /* Tamaño adecuado para móvil */
   margin-bottom: 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
+  text-transform: uppercase; /* Título en mayúsculas */
+  font-weight: bold;
 }
 
+/* Estilo de los formularios */
 form label {
   display: block;
   margin-bottom: 10px;
   font-size: 16px;
 }
 
+/* Estilo de los inputs del formulario */
 form input {
   width: 100%;
   padding: 12px;
@@ -30,8 +35,10 @@ form input {
   border-radius: 5px;
   border: 1px solid #CCC;
   font-size: 16px;
+  box-sizing: border-box; /* Aseguramos que el padding no rompa el ancho */
 }
 
+/* Estilo de los botones */
 button {
   background-color: #83AF80; /* Verde para los botones */
   color: white;
@@ -41,12 +48,14 @@ button {
   border-radius: 5px;
   font-size: 16px;
   width: 100%;
+  margin-top: 10px; /* Espacio entre el botón y los campos */
 }
 
 button:hover {
   background-color: #628441; /* Verde más oscuro al hacer hover */
 }
 
+/* Estilo del botón "Volver al Calendario" */
 .back-to-calendar-btn {
   background-color: #CFD3A5; /* Color neutral */
   color: white;
@@ -63,7 +72,7 @@ button:hover {
   background-color: #84816B; /* Gris más oscuro al hacer hover */
 }
 
-/* Estilo responsivo para pantallas pequeñas */
+/* Estilo responsivo para pantallas pequeñas (priorizando la vista móvil) */
 @media (max-width: 768px) {
   .new-rental-form {
     margin: 10px;
@@ -71,16 +80,16 @@ button:hover {
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 1.8rem; /* Aumentar tamaño en pantallas más grandes */
   }
 
   form label {
-    font-size: 14px;
+    font-size: 14px; /* Tamaño ajustado para pantallas pequeñas */
   }
 
   form input {
-    font-size: 14px;
-    padding: 12px;
+    font-size: 14px; /* Reducir el tamaño de la fuente para inputs */
+    padding: 10px; /* Ajustar el padding */
   }
 
   button {
@@ -91,6 +100,32 @@ button:hover {
   .back-to-calendar-btn {
     font-size: 18px;
     padding: 14px;
+  }
+}
+
+/* Estilos para pantallas muy pequeñas (como dispositivos de tamaño reducido) */
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.5rem; /* Ajustar más el tamaño del título */
+  }
+
+  form label {
+    font-size: 13px; /* Reducir tamaño de los labels */
+  }
+
+  form input {
+    font-size: 13px; /* Reducir aún más el tamaño de los inputs */
+    padding: 8px; /* Ajustar el padding */
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .back-to-calendar-btn {
+    font-size: 16px;
+    padding: 12px;
   }
 }
 
