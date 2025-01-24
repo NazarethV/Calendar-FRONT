@@ -1,0 +1,133 @@
+/* Estilo base para el contenedor principal */
+div {
+    padding: 20px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 20px auto;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Título */
+  h2 {
+    color: #628441; /* Verde para mantener consistencia */
+    font-size: 2rem; /* Tamaño grande para móvil */
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    text-transform: uppercase; /* Título más llamativo */
+    font-weight: bold;
+  }
+  
+  /* Estilo de los formularios */
+  form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Estilo de los inputs */
+  form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo de los botones */
+  button {
+    background-color: #83AF80; /* Verde */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%; /* Botones de ancho completo */
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #628441; /* Verde más oscuro al hacer hover */
+  }
+  
+  /* Botón "Volver al Calendario" */
+  .back-btn {
+    background-color: #CFD3A5; /* Color neutral */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .back-btn:hover {
+    background-color: #84816B; /* Gris más oscuro al hacer hover */
+  }
+  
+  /* Estilo responsivo para pantallas pequeñas */
+  @media (max-width: 768px) {
+    div {
+      margin: 10px;
+      padding: 15px;
+    }
+  
+    h2 {
+      font-size: 1.8rem;
+    }
+  
+    form label {
+      font-size: 14px;
+    }
+  
+    form input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    button {
+      font-size: 16px;
+      padding: 12px;
+    }
+  
+    .back-btn {
+      font-size: 16px;
+      padding: 12px;
+    }
+  }
+  
+  /* Estilo para pantallas muy pequeñas (como dispositivos móviles pequeños) */
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 1.5rem; /* Tamaño reducido */
+    }
+  
+    form label {
+      font-size: 13px;
+    }
+  
+    form input {
+      font-size: 13px;
+      padding: 8px;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .back-btn {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
