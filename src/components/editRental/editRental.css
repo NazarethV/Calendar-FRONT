@@ -1,0 +1,97 @@
+/* Estilos generales para el componente EditRental */
+.edit-rental-container {
+    padding: 20px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 20px auto;
+  }
+  
+  .edit-rental-container h2 {
+    color: #628441; /* Verde para los títulos */
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+  
+  .edit-rental-container form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .edit-rental-container form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    font-size: 16px;
+  }
+  
+  .edit-rental-container button {
+    background-color: #83AF80; /* Verde para los botones */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .edit-rental-container button:hover {
+    background-color: #628441; /* Verde más oscuro al hacer hover */
+  }
+  
+  .back-btn {
+    background-color: #CFD3A5; /* Color neutral */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .back-btn:hover {
+    background-color: #84816B; /* Gris más oscuro al hacer hover */
+  }
+  
+  /* Estilo responsivo para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .edit-rental-container {
+      margin: 10px;
+      padding: 15px;
+    }
+  
+    .edit-rental-container h2 {
+      font-size: 20px;
+    }
+  
+    .edit-rental-container form label {
+      font-size: 14px;
+    }
+  
+    .edit-rental-container form input {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .edit-rental-container button {
+      font-size: 18px;
+      padding: 14px;
+    }
+  
+    .back-btn {
+      font-size: 18px;
+      padding: 14px;
+    }
+  }
+  
+  
+  
