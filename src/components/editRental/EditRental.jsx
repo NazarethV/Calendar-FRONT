@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getRentalById, updateRental } from '../../redux/actions/actions';
-
-import './EditRental.css';
+import './EditRental.css';  // Importa el archivo CSS
 
 function EditRental() {
   const { id } = useParams();
@@ -47,7 +46,7 @@ function EditRental() {
   if (!rental) return <div>Cargando...</div>;
 
   return (
-    <div>
+    <div className="edit-rental-container">
       <h2>Editar Alquiler</h2>
       <form onSubmit={handleSubmit}>
         <label>
