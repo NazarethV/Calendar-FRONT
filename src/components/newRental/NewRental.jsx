@@ -25,7 +25,6 @@ function NewRental({ selectedDate }) {
     const adjustedStartDate = new Date(startDate).toISOString(); // Formato ISO UTC
     const adjustedEndDate = new Date(endDate).toISOString();
 
-
     // Crea el objeto rental con los datos del formulario
     const rental = {
       tenantName,
