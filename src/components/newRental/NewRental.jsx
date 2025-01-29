@@ -27,8 +27,12 @@ function NewRental({ selectedDate }) {
       price: parseFloat(price), // Convierte a número
       deposit: deposit ? parseFloat(deposit) : null,
       phoneNumber,
+
+      //Esto fuerza a que la fecha se envíe sin información de hora, evitando conversiones no deseadas en el backend.
       startDate: new Date(startDate).toISOString().split('T')[0], // Convertir correctamente
       endDate: new Date(endDate).toISOString().split('T')[0],
+      //Esto fuerza a que la fecha se envíe sin información de hora, evitando conversiones no deseadas en el backend.
+
       checkInTime,
       checkOutTime,
     };
