@@ -21,19 +21,14 @@ function NewRental({ selectedDate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Convertir las fechas seleccionadas a formato ISO ajustadas a la zona horaria local
-    const adjustedStartDate = new Date(startDate).toISOString(); // Formato ISO UTC
-    const adjustedEndDate = new Date(endDate).toISOString();
-
-
     // Crea el objeto rental con los datos del formulario
     const rental = {
       tenantName,
       price: parseFloat(price), // Convierte a número
       deposit: deposit ? parseFloat(deposit) : null,
       phoneNumber,
-      startDate: adjustedStartDate,
-      endDate: adjustedEndDate,
+      startDate: new Date(startDate).toISOString().split('T')[0], // Convertir correctamente
+      endDate: new Date(endDate).toISOString().split('T')[0],
       checkInTime,
       checkOutTime,
     };
