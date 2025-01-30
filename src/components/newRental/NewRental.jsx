@@ -28,14 +28,16 @@ function NewRental({ selectedDate }) {
       deposit: deposit ? parseFloat(deposit) : null,
       phoneNumber,
 
-      //Esto fuerza a que la fecha se envíe sin información de hora, evitando conversiones no deseadas en el backend.
-      startDate: new Date(startDate).toISOString().split('T')[0], // Convertir correctamente
-      endDate: new Date(endDate).toISOString().split('T')[0],
-      //Esto fuerza a que la fecha se envíe sin información de hora, evitando conversiones no deseadas en el backend.
+      
+      startDate, //: new Date(startDate).toISOString().split('T')[0], // Convertir correctamente
+      endDate, //: new Date(endDate).toISOString().split('T')[0],
+    
 
       checkInTime,
       checkOutTime,
     };
+
+    console.log('Datos a enviar:', rental);
 
     // Despacha la acción para crear el alquiler
     dispatch(createRental(rental));

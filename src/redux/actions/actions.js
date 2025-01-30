@@ -1,7 +1,7 @@
 import axios from 'axios';
 //
-//const API_URL = 'http://localhost:8080/api/v1/rentals';
-const API_URL = 'https://servidor-alquileres-backend.onrender.com/api/v1/rentals';
+const API_URL = 'http://localhost:8080/api/v1/rentals';
+//const API_URL = 'https://servidor-alquileres-backend.onrender.com/api/v1/rentals';
 
 export const getRentals = () => async (dispatch) => {
   try {
