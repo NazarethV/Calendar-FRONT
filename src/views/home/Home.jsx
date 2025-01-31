@@ -58,17 +58,28 @@ function Home() {
   };
 
   // Estilos para los días del calendario
+  // const dayPropGetter = (date) => {
+  //   const isRentedDay = events.some(
+  //     (event) =>
+  //       date >= new Date(event.start).setHours(0, 0, 0, 0) &&
+  //       date <= new Date(event.end).setHours(23, 59, 59, 999)
+  //   );
+
+  //   return {
+  //     className: isRentedDay ? 'rented-day' : '', // Aplica la clase si es un día alquilado
+  //   };
+  // };
   const dayPropGetter = (date) => {
+    const normalizedDate = new Date(date).setHours(12, 0, 0, 0); // Evita ajustes de zona horaria
     const isRentedDay = events.some(
       (event) =>
-        date >= new Date(event.start).setHours(0, 0, 0, 0) &&
-        date <= new Date(event.end).setHours(23, 59, 59, 999)
+        normalizedDate >= new Date(event.start).setHours(0, 0, 0, 0) &&
+        normalizedDate <= new Date(event.end).setHours(23, 59, 59, 999)
     );
-
-    return {
-      className: isRentedDay ? 'rented-day' : '', // Aplica la clase si es un día alquilado
-    };
+  
+    return { className: isRentedDay ? "rented-day" : "" };
   };
+  
 
   // Función para manejar la selección de un evento (alquiler)
   const handleSelectEvent = (event) => {
