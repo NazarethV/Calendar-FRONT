@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { deleteRental, getRentalById } from '../../redux/actions/actions';
 
 import './Details.css';
+import { format, parseISO } from 'date-fns';
 
 function Details() {
   const { id } = useParams();
@@ -24,17 +25,32 @@ function Details() {
 
   if (!rental) return <div>Cargando detalles...</div>;
 
+
+  const formattedStartDate = format(parseISO(rental.startDate), "yyyy-MM-dd");
+  const formattedEndDate = format(parseISO(rental.endDate), "yyyy-MM-dd");
+
+
+
   return (
     <div className="details-container">
       <h1>Detalles del Alquiler</h1>
       <p><span className="subtitle">Inquilino:</span> {rental.tenantName}</p>
-      <p>
+      {/* <p>
         <span className="subtitle">Fecha de inicio:</span>{' '}
         {new Date(rental.startDate).toLocaleDateString('es-ES')}
       </p>
       <p>
         <span className="subtitle">Fecha de fin:</span>{' '}
         {new Date(rental.endDate).toLocaleDateString('es-ES')}
+      </p> */}
+
+<p>
+        <span className="subtitle">Fecha de inicio:</span>{' '}
+        {formattedStartDate}
+      </p>
+      <p>
+        <span className="subtitle">Fecha de fin:</span>{' '}
+        {formattedEndDate}
       </p>
       <p><span className="subtitle">Precio:</span> ${rental.price}</p>
       <p><span className="subtitle">Seña:</span> ${rental.deposit || 'No especificado'}</p>

@@ -28,6 +28,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(getRentals()); // Obtener los alquileres cuando se cargue el componente
+    console.log("rentals en useEffect: ", rentals);
   }, [dispatch]);
 
   // Ordenar los alquileres por fecha de inicio (de más cercano a más lejano)
@@ -40,10 +41,10 @@ function Home() {
   // Convertir los alquileres en un formato compatible con el calendario
   const events = sortedRentals.map((rental) => ({
     title: rental.tenantName, // Nombre del inquilino
-    //start: new Date(rental.startDate), // Fecha de inicio
-    start: rental.startDate,
-    end: rental.endDate,
-    //end: new Date(rental.endDate), // Fecha de fin
+    start: new Date(rental.startDate), // Fecha de inicio
+    // start: rental.startDate,
+    // end: rental.endDate,
+    end: new Date(rental.endDate), // Fecha de fin
     id: rental.id, // ID del alquiler
     isRented: true, // Indicar que está alquilado
     price: rental.price, // Precio del alquiler
@@ -75,17 +76,27 @@ function Home() {
   };
 
   // Función para manejar la selección de una fecha o espacio en el calendario
+  // const handleSelectSlot = (slotInfo) => {
+  //   const selectedRental = rentals.find(
+  //     (rental) =>
+  //       new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
+  //   );
+  //   if (selectedRental) {
+  //     navigate(`/details/${selectedRental.id}`); // Navegar a los detalles del alquiler si se encuentra
+  //   } else {
+  //     navigate('/new-rental'); // Si no hay alquiler, ir a la creación de uno nuevo
+  //   }
+  // };
+
   const handleSelectSlot = (slotInfo) => {
-    const selectedRental = rentals.find(
-      (rental) =>
-        new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
+    if (!slotInfo?.start) return;
+  
+    const selectedRental = rentals.find((rental) =>
+      new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
     );
-    if (selectedRental) {
-      navigate(`/details/${selectedRental.id}`); // Navegar a los detalles del alquiler si se encuentra
-    } else {
-      navigate('/new-rental'); // Si no hay alquiler, ir a la creación de uno nuevo
-    }
+    navigate(selectedRental ? `/details/${selectedRental.id}` : '/new-rental');
   };
+  
 
   // Mensajes en español para el calendario
   const messages = {
@@ -110,8 +121,10 @@ function Home() {
   const rentalList = sortedRentals.map((rental) => (
     <div key={rental.id} className="rental-item">
       <h3>{rental.tenantName}</h3>
-      <p><strong>Fecha de inicio:</strong> {new Date(rental.startDate).toLocaleDateString('es-ES')}</p>
-      <p><strong>Fecha de fin:</strong> {new Date(rental.endDate).toLocaleDateString('es-ES')}</p>
+      {/* <p><strong>Fecha de inicio:</strong> {new Date(rental.startDate).toLocaleDateString('es-ES')}</p>
+      <p><strong>Fecha de fin:</strong> {new Date(rental.endDate).toLocaleDateString('es-ES')}</p> */}
+      <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+      <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
     </div>
   ));
@@ -154,6 +167,9 @@ function Home() {
 }
 
 export default Home;
+
+
+
 
 
 

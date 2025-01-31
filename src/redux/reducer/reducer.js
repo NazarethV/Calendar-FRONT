@@ -7,12 +7,24 @@ const initialState = {
   export default function rootReducer(state = initialState, action) {
     switch (action.type) {
       case 'GET_RENTALS':
-        return { ...state, rentals: action.payload };
+        return { 
+          ...state, 
+          rentals: action.payload 
+        };
+
       case 'GET_RENTAL_BY_ID':
-        return { ...state, selectedRental: action.payload };
-      case 'CREATE_RENTAL':
-        return { ...state, rentals: [...state.rentals, action.payload] };
-      case 'UPDATE_RENTAL':
+        return { 
+          ...state, 
+          selectedRental: action.payload 
+        };
+
+      // case 'CREATE_RENTAL':
+      //   return { ...state, rentals: [...state.rentals, action.payload] };
+         case 'CREATE_RENTAL':
+          return {
+            ...state,
+            rentals: [...state.rentals, action.payload],
+          }
         return {
           ...state,
           rentals: state.rentals.map((rental) =>
