@@ -41,10 +41,10 @@ function Home() {
   // Convertir los alquileres en un formato compatible con el calendario
   const events = sortedRentals.map((rental) => ({
     title: rental.tenantName, // Nombre del inquilino
-    start: new Date(rental.startDate), // Fecha de inicio
-    // start: rental.startDate,
-    // end: rental.endDate,
-    end: new Date(rental.endDate), // Fecha de fin
+    //start: new Date(rental.startDate), // Fecha de inicio
+    //end: new Date(rental.endDate), // Fecha de fin
+    start: new Date(rental.startDate + "T00:00:00"), // Asegura la conversión correcta
+    end: new Date(rental.endDate + "T23:59:59"), // Marca bien el final del alquiler
     id: rental.id, // ID del alquiler
     isRented: true, // Indicar que está alquilado
     price: rental.price, // Precio del alquiler
