@@ -172,19 +172,20 @@
 
 import React, { useEffect, useState } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import { format, parse, startOfWeek, getDay } from 'date-fns';
+import { format, parse, startOfWeek, getDay, parseISO, isValid } from 'date-fns';
 import { es } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Home.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRentals } from '../../redux/actions/actions';
 import { useNavigate } from 'react-router-dom';
-import { zonedTimeToUtc } from 'date-fns-tz'; // Importar la función para convertir fechas
+//import { zonedTimeToUtc } from 'date-fns-tz';
+import * as dateFnsTz from 'date-fns-tz';
+const { zonedTimeToUtc } = dateFnsTz;
 
-const locales = {
-  es: es,
-};
 
+
+const locales = { es };
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -194,15 +195,15 @@ const localizer = dateFnsLocalizer({
 });
 
 const isValidISODate = (dateString) => {
-  const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
-  return regex.test(dateString);
+  if (typeof dateString !== 'string') return false;
+  const date = parseISO(dateString);
+  return isValid(date);
 };
 
 function Home() {
   const dispatch = useDispatch();
   const rentals = useSelector((state) => state.rentals);
   const navigate = useNavigate();
-
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -210,32 +211,24 @@ function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    // Filtra los alquileres con fechas válidas
+    if (!rentals || rentals.length === 0) return;
+
     const validRentals = rentals.filter(
-      (rental) =>
-        isValidISODate(rental.startDate) && isValidISODate(rental.endDate)
+      (rental) => isValidISODate(rental.startDate) && isValidISODate(rental.endDate)
     );
 
-    // Ordenar los alquileres válidos por fecha de inicio
-    const sortedRentals = validRentals.sort((a, b) => {
-      const dateA = new Date(a.startDate);
-      const dateB = new Date(b.startDate);
-      return dateA - dateB;
-    });
+    const sortedRentals = validRentals.sort(
+      (a, b) => new Date(a.startDate) - new Date(b.startDate)
+    );
 
-    // Convertir las fechas a la zona horaria local usando date-fns-tz
     const calendarEvents = sortedRentals.map((rental) => {
-      const startDate = new Date(rental.startDate);
-      const endDate = new Date(rental.endDate);
-
-      // Convertir las fechas al horario local
-      const localStart = zonedTimeToUtc(startDate, 'America/Argentina/Buenos_Aires');
-      const localEnd = zonedTimeToUtc(endDate, 'America/Argentina/Buenos_Aires');
+      const startDate = parseISO(rental.startDate);
+      const endDate = parseISO(rental.endDate);
 
       return {
         title: rental.tenantName,
-        start: localStart,
-        end: localEnd,
+        start: zonedTimeToUtc(startDate, 'America/Argentina/Buenos_Aires'),
+        end: zonedTimeToUtc(endDate, 'America/Argentina/Buenos_Aires'),
         id: rental.id,
         isRented: true,
         price: rental.price,
@@ -245,22 +238,21 @@ function Home() {
     setEvents(calendarEvents);
   }, [rentals]);
 
-  const eventStyleGetter = (event) => {
-    return {
-      className: event.isRented ? 'rented-event' : 'available-event',
-    };
-  };
+  const eventStyleGetter = (event) => ({
+    className: event.isRented ? 'rented-event' : 'available-event',
+  });
 
   const dayPropGetter = (date) => {
+    const dateStart = new Date(date).setHours(0, 0, 0, 0);
+    const dateEnd = new Date(date).setHours(23, 59, 59, 999);
+
     const isRentedDay = events.some(
       (event) =>
-        date >= new Date(event.start).setHours(0, 0, 0, 0) &&
-        date <= new Date(event.end).setHours(23, 59, 59, 999)
+        dateStart >= new Date(event.start).getTime() &&
+        dateEnd <= new Date(event.end).getTime()
     );
 
-    return {
-      className: isRentedDay ? 'rented-day' : '',
-    };
+    return { className: isRentedDay ? 'rented-day' : '' };
   };
 
   const handleSelectEvent = (event) => {
@@ -272,8 +264,9 @@ function Home() {
 
     const selectedRental = rentals.find(
       (rental) =>
-        new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
+        parseISO(rental.startDate).getTime() === slotInfo.start.getTime()
     );
+
     navigate(selectedRental ? `/details/${selectedRental.id}` : '/new-rental');
   };
 
@@ -329,11 +322,7 @@ function Home() {
 
       <div className="rental-list">
         <h2>Todos los Alquileres</h2>
-        {rentalList.length === 0 ? (
-          <p>No hay alquileres registrados.</p>
-        ) : (
-          rentalList
-        )}
+        {rentalList.length === 0 ? <p>No hay alquileres registrados.</p> : rentalList}
       </div>
     </div>
   );
