@@ -27,11 +27,20 @@ function NewRental({ selectedDate }) {
       price: parseFloat(price), // Convierte a número
       deposit: deposit ? parseFloat(deposit) : null,
       phoneNumber,
-      startDate,
-      endDate,
+
+      startDate: new Date(startDate + "T00:00:00").toISOString().split("T")[0], 
+      endDate: new Date(endDate + "T00:00:00").toISOString().split("T")[0], 
+  
+
+      
+      //startDate: startDate, //: new Date(startDate).toISOString().split('T')[0], // Convertir correctamente
+      //endDate: endDate, //: new Date(endDate).toISOString().split('T')[0],
+    
       checkInTime,
       checkOutTime,
     };
+
+    console.log('Datos a enviar:', rental);
 
     // Despacha la acción para crear el alquiler
     dispatch(createRental(rental));
