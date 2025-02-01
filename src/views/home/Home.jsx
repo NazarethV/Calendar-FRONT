@@ -43,7 +43,7 @@ function Home() {
     return dateA - dateB; // Ordenar de menor a mayor fecha
   });
   
-
+//
   // Convertir los alquileres en un formato compatible con el calendario
   const events = sortedRentals.map((rental) => ({
     title: rental.tenantName, // Nombre del inquilino
