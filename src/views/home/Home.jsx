@@ -184,7 +184,7 @@ import * as dateFnsTz from 'date-fns-tz';
 const { zonedTimeToUtc } = dateFnsTz;
 
 
-
+//
 const locales = { es };
 const localizer = dateFnsLocalizer({
   format,
