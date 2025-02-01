@@ -16,4 +16,7 @@ export default defineConfig({
   build: {
     outDir: 'dist', // Define la carpeta de salida
   },
+  // optimizeDeps: {
+  //   include: ['date-fns-tz']
+  // }
 })

@@ -28,13 +28,11 @@ function NewRental({ selectedDate }) {
       deposit: deposit ? parseFloat(deposit) : null,
       phoneNumber,
 
-      startDate: new Date(startDate + "T00:00:00").toISOString().split("T")[0], 
-      endDate: new Date(endDate + "T00:00:00").toISOString().split("T")[0], 
+      // startDate: new Date(startDate + "T00:00:00").toISOString().split("T")[0], 
+      // endDate: new Date(endDate + "T00:00:00").toISOString().split("T")[0], 
   
-
-      
-      //startDate: startDate, //: new Date(startDate).toISOString().split('T')[0], // Convertir correctamente
-      //endDate: endDate, //: new Date(endDate).toISOString().split('T')[0],
+      startDate,
+      endDate, 
     
       checkInTime,
       checkOutTime,
