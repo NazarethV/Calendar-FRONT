@@ -32,8 +32,8 @@ function Home() {
 
   useEffect(() => {
     dispatch(getRentals()); // Obtener los alquileres cuando se cargue el componente
-    console.log("rentals en useEffect: ", rentals);
-  }, [dispatch]);
+  //}, [dispatch]);
+}, []);
 
   // Ordenar los alquileres por fecha de inicio (de más cercano a más lejano)
   // const sortedRentals = rentals.sort((a, b) => {
@@ -266,6 +266,8 @@ function Home() {
 }
 
 export default Home;
+
+
 
 
 // import React, { useEffect, useState } from 'react';
