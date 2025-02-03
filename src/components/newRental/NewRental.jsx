@@ -16,12 +16,10 @@ function NewRental({ selectedDate }) {
   const [checkOutTime, setCheckOutTime] = useState('');
   
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Añade esto
-
+  const dispatch = useDispatch(); 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Crea el objeto rental con los datos del formulario
     const rental = {
       tenantName,
       price: parseFloat(price), // Convierte a número
@@ -34,8 +32,8 @@ function NewRental({ selectedDate }) {
       startDate,
       endDate, 
     
-      checkInTime,
-      checkOutTime,
+      checkInTime: checkInTime ? checkInTime : null,
+      checkOutTime: checkOutTime ? checkOutTime : null,
     };
 
     console.log('Datos a enviar:', rental);
@@ -43,7 +41,6 @@ function NewRental({ selectedDate }) {
     // Despacha la acción para crear el alquiler
     dispatch(createRental(rental));
 
-    // Redirige al calendario después de guardar
     navigate('/home');
   };
 
