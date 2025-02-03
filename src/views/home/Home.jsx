@@ -7,6 +7,7 @@ import './Home.css'; // Estilos específicos de este componente
 import { useDispatch, useSelector } from 'react-redux';
 import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
 import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
+import CustomDateHeader from './CustomDateHeader';
 
 // Localizador para fecha en español
 const locales = {
@@ -161,6 +162,12 @@ function Home() {
           defaultView="month"
           messages={messages}
           culture="es"
+           // Sobrescribir la cabecera de la fecha en la vista de mes:
+          components={{
+            month: {
+            dateHeader: CustomDateHeader
+            }
+          }}
         />
       </div>
 
