@@ -129,17 +129,52 @@ function Home() {
     monthLabel: 'Mes',
   };
 
-  // Crear una lista con todos los alquileres ordenados
-  const rentalList = sortedRentals.map((rental) => (
-    <div key={rental.id} className="rental-item">
-      <h3>{rental.tenantName}</h3>
-      {/* <p><strong>Fecha de inicio:</strong> {new Date(rental.startDate).toLocaleDateString('es-ES')}</p>
-      <p><strong>Fecha de fin:</strong> {new Date(rental.endDate).toLocaleDateString('es-ES')}</p> */}
-      <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-      <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
-      <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
-    </div>
-  ));
+   // --- Lista Filtrada de alquileres por fecha (que pasaron y deben pasar) ---
+   const today = new Date();
+   today.setHours(0, 0, 0, 0);
+ 
+   const upcomingRentals = sortedRentals.filter((rental) => {
+     const rentalEnd = new Date(rental.endDate);
+     rentalEnd.setHours(0, 0, 0, 0);
+     return rentalEnd >= today;
+   });
+ 
+   const pastRentals = sortedRentals.filter((rental) => {
+     const rentalEnd = new Date(rental.endDate);
+     rentalEnd.setHours(0, 0, 0, 0);
+     return rentalEnd < today;
+   });
+ 
+   const upcomingRentalList = upcomingRentals.map((rental) => (
+     <div key={rental.id} className="rental-item">
+       <h3>{rental.tenantName}</h3>
+       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
+     </div>
+   ));
+ 
+   const pastRentalList = pastRentals.map((rental) => (
+     <div key={rental.id} className="rental-item">
+       <h3>{rental.tenantName}</h3>
+       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
+     </div>
+   ));
+
+
+  // Lista general con todos los alquileres ordenados
+  // const rentalList = sortedRentals.map((rental) => (
+  //   <div key={rental.id} className="rental-item">
+  //     <h3>{rental.tenantName}</h3>
+  //     {/* <p><strong>Fecha de inicio:</strong> {new Date(rental.startDate).toLocaleDateString('es-ES')}</p>
+  //     <p><strong>Fecha de fin:</strong> {new Date(rental.endDate).toLocaleDateString('es-ES')}</p> */}
+  //     <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+  //     <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+  //     <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
+  //   </div>
+  // ));
 
   return (
     <div className="calendar-container">
@@ -171,15 +206,35 @@ function Home() {
         />
       </div>
 
-      {/* Lista de todos los alquileres */}
+      {/* Lista de alquileres próximos */}
       <div className="rental-list">
+        <h2>Próximos Alquileres</h2>
+        {upcomingRentalList.length === 0 ? (
+          <p>No hay alquileres próximos registrados.</p>
+        ) : (
+          upcomingRentalList
+        )}
+      </div>
+
+      {/* Lista de alquileres pasados */}
+      <div className="rental-list">
+        <h2>Alquileres Pasados</h2>
+        {pastRentalList.length === 0 ? (
+          <p>No hay alquileres pasados registrados.</p>
+        ) : (
+          pastRentalList
+        )}
+      </div>
+
+      {/* Lista de todos los alquileres */}
+      {/* <div className="rental-list">
         <h2>Todos los Alquileres</h2>
         {rentalList.length === 0 ? (
           <p>No hay alquileres registrados.</p>
         ) : (
           rentalList
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
