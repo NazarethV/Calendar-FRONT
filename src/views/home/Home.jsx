@@ -27,6 +27,9 @@ function Home() {
   const rentals = useSelector((state) => state.rentals); // Obtener los alquileres desde el estado
   const navigate = useNavigate();
 
+  // Estado para el filtro: 'upcoming' o 'past'
+  const [filter, setFilter] = useState('upcoming');
+
   useEffect(() => {
     dispatch(getRentals()); // Obtener los alquileres cuando se cargue el componente
     console.log("rentals en useEffect: ", rentals);
@@ -38,6 +41,8 @@ function Home() {
   //   const dateB = new Date(b.startDate);
   //   return dateA - dateB; // Ordenar de menor a mayor fecha
   // });
+
+  //Ordenar los alquileres por fecha de inicio
   const sortedRentals = rentals.sort((a, b) => {
     const dateA = parse(a.startDate, 'yyyy-MM-dd', new Date());
     const dateB = parse(b.startDate, 'yyyy-MM-dd', new Date());
@@ -46,6 +51,7 @@ function Home() {
   
 //
   // Convertir los alquileres en un formato compatible con el calendario
+    // Convertir alquileres en eventos para el calendario
   const events = sortedRentals.map((rental) => ({
     title: rental.tenantName, // Nombre del inquilino
     //start: new Date(rental.startDate), // Fecha de inicio
@@ -129,39 +135,40 @@ function Home() {
     monthLabel: 'Mes',
   };
 
-   // --- Lista Filtrada de alquileres por fecha (que pasaron y deben pasar) ---
-   const today = new Date();
-   today.setHours(0, 0, 0, 0);
- 
-   const upcomingRentals = sortedRentals.filter((rental) => {
-     const rentalEnd = new Date(rental.endDate);
-     rentalEnd.setHours(0, 0, 0, 0);
-     return rentalEnd >= today;
-   });
- 
-   const pastRentals = sortedRentals.filter((rental) => {
-     const rentalEnd = new Date(rental.endDate);
-     rentalEnd.setHours(0, 0, 0, 0);
-     return rentalEnd < today;
-   });
- 
-   const upcomingRentalList = upcomingRentals.map((rental) => (
-     <div key={rental.id} className="rental-item">
-       <h3>{rental.tenantName}</h3>
-       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
-       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
-     </div>
-   ));
- 
-   const pastRentalList = pastRentals.map((rental) => (
-     <div key={rental.id} className="rental-item">
-       <h3>{rental.tenantName}</h3>
-       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
-       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
-     </div>
-   ));
+   // --- Filtrado de alquileres por fecha ---
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcomingRentals = sortedRentals.filter((rental) => {
+    const rentalEnd = new Date(rental.endDate);
+    rentalEnd.setHours(0, 0, 0, 0);
+    return rentalEnd >= today;
+  });
+
+  const pastRentals = sortedRentals.filter((rental) => {
+    const rentalEnd = new Date(rental.endDate);
+    rentalEnd.setHours(0, 0, 0, 0);
+    return rentalEnd < today;
+  });
+
+  // Crear listas de renderizado
+  const upcomingRentalList = upcomingRentals.map((rental) => (
+    <div key={rental.id} className="rental-item">
+      <h3>{rental.tenantName}</h3>
+      <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+      <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+      <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
+    </div>
+  ));
+
+  const pastRentalList = pastRentals.map((rental) => (
+    <div key={rental.id} className="rental-item">
+      <h3>{rental.tenantName}</h3>
+      <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+      <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+      <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
+    </div>
+  ));
 
 
   // Lista general con todos los alquileres ordenados
@@ -206,23 +213,42 @@ function Home() {
         />
       </div>
 
-      {/* Lista de alquileres próximos */}
-      <div className="rental-list">
-        <h2>Próximos Alquileres</h2>
-        {upcomingRentalList.length === 0 ? (
-          <p>No hay alquileres próximos registrados.</p>
-        ) : (
-          upcomingRentalList
-        )}
+      {/* Botones para filtrar la lista */}
+      <div className="filter-buttons">
+        <button
+          className={filter === 'upcoming' ? 'active' : ''}
+          onClick={() => setFilter('upcoming')}
+        >
+          Próximos Alquileres
+        </button>
+        <button
+          className={filter === 'past' ? 'active' : ''}
+          onClick={() => setFilter('past')}
+        >
+          Alquileres Pasados
+        </button>
       </div>
 
-      {/* Lista de alquileres pasados */}
+      {/* Renderizado condicional según el filtro */}
       <div className="rental-list">
-        <h2>Alquileres Pasados</h2>
-        {pastRentalList.length === 0 ? (
-          <p>No hay alquileres pasados registrados.</p>
+        {filter === 'upcoming' ? (
+          <>
+            <h2>Próximos Alquileres</h2>
+            {upcomingRentalList.length === 0 ? (
+              <p>No hay alquileres próximos registrados.</p>
+            ) : (
+              upcomingRentalList
+            )}
+          </>
         ) : (
-          pastRentalList
+          <>
+            <h2>Alquileres Pasados</h2>
+            {pastRentalList.length === 0 ? (
+              <p>No hay alquileres pasados registrados.</p>
+            ) : (
+              pastRentalList
+            )}
+          </>
         )}
       </div>
 
