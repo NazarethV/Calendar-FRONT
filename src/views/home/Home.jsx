@@ -8,11 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
 import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
 import CustomDateHeader from './CustomDateHeader';
-import CustomDateCellWrapper from './Custom DateCellWrapper';
 
-// Localizador para fecha en español
 const locales = {
-  es: es,
+  es: es, // Localizador para fecha en español (porq o sino era en ingkes)
 };
 
 const localizer = dateFnsLocalizer({
@@ -33,16 +31,9 @@ function Home() {
 
   useEffect(() => {
     dispatch(getRentals());
-  //}, [dispatch]);
 }, []);
 
 
-  //Ordenar los alquileres por fecha de inicio
-  // const sortedRentals = rentals.sort((a, b) => {
-  //   const dateA = parse(a.startDate, 'yyyy-MM-dd', new Date());
-  //   const dateB = parse(b.startDate, 'yyyy-MM-dd', new Date());
-  //   return dateA - dateB; // Ordenar de menor a mayor fecha
-  // });
   const sortedRentals = [...rentals].sort((a, b) => { //Al hacer [...rentals] creas un nuevo arreglo con los mismos elementos, y luego lo ordenas sin afectar directamente el estado que maneja Redux.
     const dateA = parse(a.startDate, 'yyyy-MM-dd', new Date());
     const dateB = parse(b.startDate, 'yyyy-MM-dd', new Date());
@@ -50,21 +41,15 @@ function Home() {
   });
   
   
-//
   // Convertir los alquileres en un formato compatible con el calendario
-    // Convertir alquileres en eventos para el calendario
+  // Convertir alquileres en eventos para el calendario
   const events = sortedRentals.map((rental) => ({
-    title: rental.tenantName, // Nombre del inquilino
-    //start: new Date(rental.startDate), // Fecha de inicio
-    //end: new Date(rental.endDate), // Fecha de fin
-     
+    title: rental.tenantName,  
     start: parse(rental.startDate, 'yyyy-MM-dd', new Date()),
     end: parse(rental.endDate, 'yyyy-MM-dd', new Date()),
-
-
-    id: rental.id, // ID del alquiler
-    isRented: true, // Indicar que está alquilado
-    price: rental.price, // Precio del alquiler
+    id: rental.id,
+    isRented: true,
+    price: rental.price, 
   }));
 
   // Estilos de los eventos del calendario
@@ -83,7 +68,7 @@ function Home() {
     );
 
     return {
-      className: isRentedDay ? 'rented-day' : '', // Aplica la clase si es un día alquilado
+      className: isRentedDay ? 'rented-day' : '',
     };
   };
 
@@ -94,28 +79,7 @@ function Home() {
     navigate(`/details/${event.id}`); // Navegar a los detalles del alquiler
   };
 
-  // Función para manejar la selección de una fecha o espacio en el calendario
-  // const handleSelectSlot = (slotInfo) => {
-  //   const selectedRental = rentals.find(
-  //     (rental) =>
-  //       new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
-  //   );
-  //   if (selectedRental) {
-  //     navigate(`/details/${selectedRental.id}`); // Navegar a los detalles del alquiler si se encuentra
-  //   } else {
-  //     navigate('/new-rental'); // Si no hay alquiler, ir a la creación de uno nuevo
-  //   }
-  // };
-
-  //ESTE ERA EL ÚTIMO QUE SE ESTABA UTILIZANDO
-  // const handleSelectSlot = (slotInfo) => {
-  //   if (!slotInfo?.start) return;
   
-  //   const selectedRental = rentals.find((rental) =>
-  //     new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
-  //   );
-  //   navigate(selectedRental ? `/details/${selectedRental.id}` : '/new-rental');
-  // };
   
   const handleSelectSlot = (slotInfo) => {
     if (!slotInfo?.start) return;
@@ -136,7 +100,6 @@ function Home() {
   };
   
 
-
   // Mensajes en español para el calendario
   const messages = {
     next: 'Mes Siguiente',
@@ -156,7 +119,7 @@ function Home() {
     monthLabel: 'Mes',
   };
 
-   // --- Filtrado de alquileres por fecha ---
+//Filtrado de alquileres por fecha 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -195,7 +158,7 @@ function Home() {
   return (
     <div className="calendar-container">
       <h1>Calendario de Alquileres</h1>
-
+    
       {/* Calendario */}
       <div className="calendar">
         <Calendar
@@ -203,7 +166,7 @@ function Home() {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }} // Manteniendo la altura original
+          style={{ height: 500 }} 
           onSelectEvent={handleSelectEvent}
  onSelectSlot={handleSelectSlot}
           selectable
@@ -217,8 +180,6 @@ function Home() {
           components={{
             month: {
             dateHeader: CustomDateHeader,
-          //ESTE ES EL ÚLTIMO QUE AGREGUÉ -->
-         // dateCellWrapper: CustomDateCellWrapper //PARA LA INTERACCIÓN CON LAS CELDAS DEL CALENDARIO (si redirige a Detail o NewRental)
             }
           }}
         />
@@ -263,15 +224,6 @@ function Home() {
         )}
       </div>
 
-      {/* Lista de todos los alquileres */}
-      {/* <div className="rental-list">
-        <h2>Todos los Alquileres</h2>
-        {rentalList.length === 0 ? (
-          <p>No hay alquileres registrados.</p>
-        ) : (
-          rentalList
-        )}
-      </div> */}
     </div>
   );
 }
