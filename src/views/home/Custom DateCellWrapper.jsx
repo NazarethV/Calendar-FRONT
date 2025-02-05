@@ -7,16 +7,19 @@ const CustomDateCellWrapper = ({ children, value }) => {
   const navigate = useNavigate();
   const rentals = useSelector((state) => state.rentals);
 
-  // Convertir la fecha de la celda a string para comparar (por ejemplo, "Mon Sep 04 2023")
-  const dateString = new Date(value).toDateString();
+  // Convertir la fecha de la celda a string para comparar
+  const cellDate = new Date(value).toDateString();
 
-  // Buscar un alquiler cuya fecha de inicio coincida con la fecha de la celda
+  // Buscar un alquiler que tenga startDate igual a la fecha de la celda
   const rental = rentals.find(
-    (rental) =>
-      new Date(rental.startDate).toDateString() === dateString
+    (rental) => new Date(rental.startDate).toDateString() === cellDate
   );
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    // Prevenir que se dispare algún evento de la celda predeterminado
+    e.preventDefault();
+    e.stopPropagation();
+
     if (rental) {
       navigate(`/details/${rental.id}`);
     } else {
@@ -25,7 +28,10 @@ const CustomDateCellWrapper = ({ children, value }) => {
   };
 
   return (
-    <div onClick={handleClick}>
+    <div
+      onClickCapture={handleClick}
+      style={{ cursor: 'pointer', height: '100%' }}
+    >
       {children}
     </div>
   );
