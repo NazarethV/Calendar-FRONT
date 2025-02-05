@@ -43,11 +43,17 @@ function Home() {
   // });
 
   //Ordenar los alquileres por fecha de inicio
-  const sortedRentals = rentals.sort((a, b) => {
+  // const sortedRentals = rentals.sort((a, b) => {
+  //   const dateA = parse(a.startDate, 'yyyy-MM-dd', new Date());
+  //   const dateB = parse(b.startDate, 'yyyy-MM-dd', new Date());
+  //   return dateA - dateB; // Ordenar de menor a mayor fecha
+  // });
+  const sortedRentals = [...rentals].sort((a, b) => { //Al hacer [...rentals] creas un nuevo arreglo con los mismos elementos, y luego lo ordenas sin afectar directamente el estado que maneja Redux.
     const dateA = parse(a.startDate, 'yyyy-MM-dd', new Date());
     const dateB = parse(b.startDate, 'yyyy-MM-dd', new Date());
-    return dateA - dateB; // Ordenar de menor a mayor fecha
+    return dateA - dateB;
   });
+  
   
 //
   // Convertir los alquileres en un formato compatible con el calendario
