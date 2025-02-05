@@ -25,23 +25,17 @@ const localizer = dateFnsLocalizer({
 
 function Home() {
   const dispatch = useDispatch();
-  const rentals = useSelector((state) => state.rentals); // Obtener los alquileres desde el estado
+  const rentals = useSelector((state) => state.rentals); 
   const navigate = useNavigate();
 
   // Estado para el filtro: 'upcoming' o 'past'
   const [filter, setFilter] = useState('upcoming');
 
   useEffect(() => {
-    dispatch(getRentals()); // Obtener los alquileres cuando se cargue el componente
+    dispatch(getRentals());
   //}, [dispatch]);
 }, []);
 
-  // Ordenar los alquileres por fecha de inicio (de más cercano a más lejano)
-  // const sortedRentals = rentals.sort((a, b) => {
-  //   const dateA = new Date(a.startDate);
-  //   const dateB = new Date(b.startDate);
-  //   return dateA - dateB; // Ordenar de menor a mayor fecha
-  // });
 
   //Ordenar los alquileres por fecha de inicio
   // const sortedRentals = rentals.sort((a, b) => {
@@ -177,18 +171,6 @@ function Home() {
     </div>
   ));
 
-
-  // Lista general con todos los alquileres ordenados
-  // const rentalList = sortedRentals.map((rental) => (
-  //   <div key={rental.id} className="rental-item">
-  //     <h3>{rental.tenantName}</h3>
-  //     {/* <p><strong>Fecha de inicio:</strong> {new Date(rental.startDate).toLocaleDateString('es-ES')}</p>
-  //     <p><strong>Fecha de fin:</strong> {new Date(rental.endDate).toLocaleDateString('es-ES')}</p> */}
-  //     <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-  //     <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
-  //     <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
-  //   </div>
-  // ));
 
   return (
     <div className="calendar-container">
