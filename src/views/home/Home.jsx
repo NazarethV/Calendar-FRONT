@@ -3,7 +3,7 @@ import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './Home.css'; // Estilos específicos de este componente
+import './Home.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
 import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
@@ -107,15 +107,35 @@ function Home() {
   //   }
   // };
 
+  //ESTE ERA EL ÚTIMO QUE SE ESTABA UTILIZANDO
+  // const handleSelectSlot = (slotInfo) => {
+  //   if (!slotInfo?.start) return;
+  
+  //   const selectedRental = rentals.find((rental) =>
+  //     new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
+  //   );
+  //   navigate(selectedRental ? `/details/${selectedRental.id}` : '/new-rental');
+  // };
+  
   const handleSelectSlot = (slotInfo) => {
     if (!slotInfo?.start) return;
   
-    const selectedRental = rentals.find((rental) =>
-      new Date(rental.startDate).toDateString() === slotInfo.start.toDateString()
-    );
+    // Normalizamos la fecha seleccionada para comparar correctamente
+    const selectedDate = slotInfo.start.toISOString().split("T")[0];
+  
+    // Buscar un alquiler que incluya la fecha seleccionada
+    const selectedRental = rentals.find((rental) => {
+      const startDate = new Date(rental.startDate).toISOString().split("T")[0];
+      const endDate = new Date(rental.endDate).toISOString().split("T")[0];
+  
+      return selectedDate >= startDate && selectedDate <= endDate;
+    });
+  
+    // Redirigir según si hay un alquiler o no
     navigate(selectedRental ? `/details/${selectedRental.id}` : '/new-rental');
   };
   
+
 
   // Mensajes en español para el calendario
   const messages = {
@@ -185,7 +205,7 @@ function Home() {
           endAccessor="end"
           style={{ height: 500 }} // Manteniendo la altura original
           onSelectEvent={handleSelectEvent}
-//NO SÉ QUE ONDA ESTE --> // onSelectSlot={handleSelectSlot}
+ onSelectSlot={handleSelectSlot}
           selectable
           eventPropGetter={eventStyleGetter}
           dayPropGetter={dayPropGetter}
