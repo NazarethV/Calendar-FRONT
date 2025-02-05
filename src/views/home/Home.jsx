@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
 import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
 import CustomDateHeader from './CustomDateHeader';
+import CustomDateCellWrapper from './Custom DateCellWrapper';
 
 // Localizador para fecha en español
 const locales = {
@@ -213,7 +214,8 @@ function Home() {
            // Sobrescribir la cabecera de la fecha en la vista de mes:
           components={{
             month: {
-            dateHeader: CustomDateHeader
+            dateHeader: CustomDateHeader,
+            dateCellWrapper: CustomDateCellWrapper //PARA LA INTERACCIÓN CON LAS CELDAS DEL CALENDARIO (si redirige a Detail o NewRental)
             }
           }}
         />
