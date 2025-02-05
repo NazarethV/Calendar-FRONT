@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
 import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
 import CustomDateHeader from './CustomDateHeader';
+import CustomDateCellWrapper from './Custom DateCellWrapper';
 
 // Localizador para fecha en español
 const locales = {
@@ -202,7 +203,7 @@ function Home() {
           endAccessor="end"
           style={{ height: 500 }} // Manteniendo la altura original
           onSelectEvent={handleSelectEvent}
-          onSelectSlot={handleSelectSlot}
+//NO SÉ QUE ONDA ESTE --> // onSelectSlot={handleSelectSlot}
           selectable
           eventPropGetter={eventStyleGetter}
           dayPropGetter={dayPropGetter}
@@ -213,7 +214,9 @@ function Home() {
            // Sobrescribir la cabecera de la fecha en la vista de mes:
           components={{
             month: {
-            dateHeader: CustomDateHeader
+            dateHeader: CustomDateHeader,
+          //ESTE ES EL ÚLTIMO QUE AGREGUÉ -->
+         // dateCellWrapper: CustomDateCellWrapper //PARA LA INTERACCIÓN CON LAS CELDAS DEL CALENDARIO (si redirige a Detail o NewRental)
             }
           }}
         />
@@ -272,173 +275,6 @@ function Home() {
 }
 
 export default Home;
-
-
-
-
-// import React, { useEffect, useState } from 'react';
-// import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-// import { format, parse, startOfWeek, getDay, parseISO, isValid } from 'date-fns';
-// import { es } from 'date-fns/locale';
-// import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import './Home.css';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getRentals } from '../../redux/actions/actions';
-// import { useNavigate } from 'react-router-dom';
-// //import { zonedTimeToUtc } from 'date-fns-tz';
-// //   import * as dateFnsTz from 'date-fns-tz';
-// //  const { zonedTimeToUtc } = dateFnsTz;
-
-// import { zonedTimeToUtc } from "date-fns-tz";
-
-
-
-// const locales = { es };
-// const localizer = dateFnsLocalizer({
-//   format,
-//   parse,
-//   startOfWeek,
-//   getDay,
-//   locales,
-// });
-
-// const isValidISODate = (dateString) => {
-//   if (typeof dateString !== 'string') return false;
-//   const date = parseISO(dateString);
-//   return isValid(date);
-// };
-
-// function Home() {
-//   const dispatch = useDispatch();
-//   const rentals = useSelector((state) => state.rentals);
-//   const navigate = useNavigate();
-//   const [events, setEvents] = useState([]);
-
-//   useEffect(() => {
-//     dispatch(getRentals());
-//   }, [dispatch]);
-
-//   useEffect(() => {
-//     if (!rentals || rentals.length === 0) return;
-
-//     const validRentals = rentals.filter(
-//       (rental) => isValidISODate(rental.startDate) && isValidISODate(rental.endDate)
-//     );
-
-//     const sortedRentals = validRentals.sort(
-//       (a, b) => new Date(a.startDate) - new Date(b.startDate)
-//     );
-
-//     const calendarEvents = sortedRentals.map((rental) => {
-//       const startDate = parseISO(rental.startDate);
-//       const endDate = parseISO(rental.endDate);
-
-//       return {
-//         title: rental.tenantName,
-//         start: zonedTimeToUtc(startDate, 'America/Argentina/Buenos_Aires'),
-//         end: zonedTimeToUtc(endDate, 'America/Argentina/Buenos_Aires'),
-//         id: rental.id,
-//         isRented: true,
-//         price: rental.price,
-//       };
-//     });
-
-//     setEvents(calendarEvents);
-//   }, [rentals]);
-
-//   const eventStyleGetter = (event) => ({
-//     className: event.isRented ? 'rented-event' : 'available-event',
-//   });
-
-//   const dayPropGetter = (date) => {
-//     const dateStart = new Date(date).setHours(0, 0, 0, 0);
-//     const dateEnd = new Date(date).setHours(23, 59, 59, 999);
-
-//     const isRentedDay = events.some(
-//       (event) =>
-//         dateStart >= new Date(event.start).getTime() &&
-//         dateEnd <= new Date(event.end).getTime()
-//     );
-
-//     return { className: isRentedDay ? 'rented-day' : '' };
-//   };
-
-//   const handleSelectEvent = (event) => {
-//     navigate(`/details/${event.id}`);
-//   };
-
-//   const handleSelectSlot = (slotInfo) => {
-//     if (!slotInfo?.start) return;
-
-//     const selectedRental = rentals.find(
-//       (rental) =>
-//         parseISO(rental.startDate).getTime() === slotInfo.start.getTime()
-//     );
-
-//     navigate(selectedRental ? `/details/${selectedRental.id}` : '/new-rental');
-//   };
-
-//   const messages = {
-//     next: 'Mes Siguiente',
-//     previous: 'Mes Anterior',
-//     today: 'Hoy',
-//     month: 'Calendario',
-//     week: 'Semana',
-//     day: 'Día',
-//     agenda: 'Agenda',
-//     date: 'Fecha',
-//     time: 'Hora',
-//     event: 'Persona',
-//     allDay: 'Todo el día',
-//     noEventsInRange: 'No hay días alquilados en estas fechas.',
-//     weekLabel: 'Semana',
-//     dayLabel: 'Día',
-//     monthLabel: 'Mes',
-//   };
-
-//   const rentalList = rentals.map((rental) => (
-//     <div key={rental.id} className="rental-item">
-//       <h3>{rental.tenantName}</h3>
-//       <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-//       <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
-//       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
-//     </div>
-//   ));
-
-//   return (
-//     <div className="calendar-container">
-//       <h1>Calendario de Alquileres</h1>
-
-//       <div className="calendar">
-//         <Calendar
-//           localizer={localizer}
-//           events={events}
-//           startAccessor="start"
-//           endAccessor="end"
-//           style={{ height: 500 }}
-//           onSelectEvent={handleSelectEvent}
-//           onSelectSlot={handleSelectSlot}
-//           selectable
-//           eventPropGetter={eventStyleGetter}
-//           dayPropGetter={dayPropGetter}
-//           views={['month', 'agenda']}
-//           defaultView="month"
-//           messages={messages}
-//           culture="es"
-//         />
-//       </div>
-
-//       <div className="rental-list">
-//         <h2>Todos los Alquileres</h2>
-//         {rentalList.length === 0 ? <p>No hay alquileres registrados.</p> : rentalList}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Home;
-
-
 
 
 ///////////////////////////////////////
