@@ -14,6 +14,7 @@ function NewRental({ selectedDate }) {
   const [endDate, setEndDate] = useState(selectedDate || '');
   const [checkInTime, setCheckInTime] = useState('');
   const [checkOutTime, setCheckOutTime] = useState('');
+  const [details, setDetails] = useState('');
   
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
@@ -34,6 +35,7 @@ function NewRental({ selectedDate }) {
     
       checkInTime: checkInTime ? checkInTime : null,
       checkOutTime: checkOutTime ? checkOutTime : null,
+      details, 
     };
 
     console.log('Datos a enviar:', rental);
@@ -120,6 +122,15 @@ function NewRental({ selectedDate }) {
             onChange={(e) => setCheckOutTime(e.target.value)}
           />
         </label>
+        <label>
+          Detalles (opcional):
+          <textarea
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+            placeholder="Agrega información adicional del alquiler"
+          />
+        </label>
+
         <button type="submit">Guardar Alquiler</button>
       </form>
       <button onClick={handleBackToCalendar} className="back-to-calendar-btn">
