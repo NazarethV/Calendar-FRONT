@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import { format, parse, startOfWeek, getDay } from 'date-fns';
+import { format, parse, startOfWeek, getDay, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Home.css';
@@ -143,8 +143,11 @@ useEffect(() => {
   const upcomingRentalList = upcomingRentals.map((rental) => (
     <div key={rental.id} className="rental-item">
       <h3>{rental.tenantName}</h3>
-      <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-      <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+      <p><strong>Fecha de inicio:</strong> {format(parseISO(rental.startDate), "dd-MM-yyyy")}</p>
+      <p><strong>Fecha de fin:</strong> {format(parseISO(rental.endDate), "dd-MM-yyyy")}</p>
+
+      {/* <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+      <p><strong>Fecha de fin:</strong> {rental.endDate}</p> */}
       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
     </div>
   ));
@@ -152,8 +155,11 @@ useEffect(() => {
   const pastRentalList = pastRentals.map((rental) => (
     <div key={rental.id} className="rental-item">
       <h3>{rental.tenantName}</h3>
-      <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
-      <p><strong>Fecha de fin:</strong> {rental.endDate}</p>
+      <p><strong>Fecha de inicio:</strong> {format(parseISO(rental.startDate), "dd-MM-yyyy")}</p>
+      <p><strong>Fecha de fin:</strong> {format(parseISO(rental.endDate), "dd-MM-yyyy")}</p>
+
+      {/* <p><strong>Fecha de inicio:</strong> {rental.startDate}</p>
+      <p><strong>Fecha de fin:</strong> {rental.endDate}</p> */}
       <button onClick={() => navigate(`/details/${rental.id}`)}>Ver Detalles</button>
     </div>
   ));
@@ -163,7 +169,6 @@ useEffect(() => {
     <div className="calendar-container">
       <h1>Calendario de Alquileres</h1>
     
-      {/* Calendario */}
       <div className="calendar">
         <Calendar
           localizer={localizer}
@@ -172,7 +177,7 @@ useEffect(() => {
           endAccessor="end"
           style={{ height: 500 }} 
           onSelectEvent={handleSelectEvent}
- onSelectSlot={handleSelectSlot}
+          onSelectSlot={handleSelectSlot}
           selectable
           eventPropGetter={eventStyleGetter}
           dayPropGetter={dayPropGetter}
