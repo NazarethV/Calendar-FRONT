@@ -18,6 +18,7 @@ function EditRental() {
   const [endDate, setEndDate] = useState('');
   const [checkInTime, setCheckInTime] = useState('');
   const [checkOutTime, setCheckOutTime] = useState('');
+  const [details, setDetails] = useState('');
 
   useEffect(() => {
     dispatch(getRentalById(id));
@@ -33,12 +34,23 @@ function EditRental() {
       setEndDate(rental.endDate);
       setCheckInTime(rental.checkInTime);
       setCheckOutTime(rental.checkOutTime);
+      setDetails(rental.details || '');
     }
   }, [rental]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedRental = { tenantName, price, deposit, phoneNumber, startDate, endDate, checkInTime, checkOutTime };
+    const updatedRental = { 
+      tenantName, 
+      price, 
+      deposit, 
+      phoneNumber, 
+      startDate, 
+      endDate, 
+      checkInTime, 
+      checkOutTime, 
+      details 
+    };
     dispatch(updateRental(id, updatedRental));
     navigate('/home'); 
   };
@@ -117,6 +129,15 @@ function EditRental() {
             onChange={(e) => setCheckOutTime(e.target.value)}
           />
         </label>
+        <label>
+          Detalles (opcional):
+          <textarea
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+            placeholder="Agrega información adicional del alquiler"
+          />
+        </label>
+
         <button type="submit">Actualizar Alquiler</button>
       </form>
       <button onClick={() => navigate('/home')} className="back-btn">
