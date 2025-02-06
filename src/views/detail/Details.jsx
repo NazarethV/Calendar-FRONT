@@ -67,6 +67,10 @@ function Details() {
           ? rental.checkOutTime.slice(0, 5) // Extrae solo "hh:mm" del formato "hh:mm:ss"
           : 'No especificado'}
       </p>
+
+      <p>
+        <span className="subtitle">Detalles:</span> {rental.details || 'No especificado'}
+      </p>
       
       <button onClick={() => navigate(`/edit-rental/${id}`)} className="edit-btn">
         Editar información del alquiler
