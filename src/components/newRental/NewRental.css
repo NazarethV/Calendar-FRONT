@@ -38,6 +38,16 @@ form input {
   box-sizing: border-box; /* Aseguramos que el padding no rompa el ancho */
 }
 
+.new-rental-form form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
 /* Estilo de los botones */
 button {
   background-color: #83AF80; /* Verde para los botones */
@@ -128,6 +138,20 @@ button:hover {
     padding: 12px;
   }
 }
+
+
+
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: vertical; /* Permite que el usuario cambie el alto si es necesario */
+}
+
 
 
 

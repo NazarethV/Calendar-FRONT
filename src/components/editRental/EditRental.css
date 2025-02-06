@@ -6,6 +6,8 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     margin: 20px auto;
+    /*El último agregado:*/
+    font-family: 'Arial', sans-serif;
   }
   
   .edit-rental-container h2 {
@@ -22,14 +24,21 @@
     font-size: 16px;
   }
   
-  .edit-rental-container form input {
+  .edit-rental-container form input,
+  .edit-rental-container from textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #CCC;
     font-size: 16px;
+    box-sizing: border-box;
   }
+
+  /* Agregar resize vertical para textarea */
+.edit-rental-container form textarea {
+  resize: vertical;
+}
   
   .edit-rental-container button {
     background-color: #83AF80; /* Verde para los botones */
@@ -91,4 +100,19 @@
       font-size: 18px;
       padding: 14px;
     }
-  }
+
+}
+
+
+form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: vertical; 
+}
+
+  
