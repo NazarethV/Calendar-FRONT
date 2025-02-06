@@ -26,9 +26,11 @@ function Details() {
   if (!rental) return <div>Cargando detalles...</div>;
 
 
-  const formattedStartDate = format(parseISO(rental.startDate), "yyyy-MM-dd");
-  const formattedEndDate = format(parseISO(rental.endDate), "yyyy-MM-dd");
-
+  // const formattedStartDate = format(parseISO(rental.startDate), "yyyy-MM-dd");
+  // const formattedEndDate = format(parseISO(rental.endDate), "yyyy-MM-dd");
+  const formattedStartDate = format(parseISO(rental.startDate), "dd-MM-yyyy");
+  const formattedEndDate = format(parseISO(rental.endDate), "dd-MM-yyyy");
+  
 
 
   return (
