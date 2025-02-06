@@ -29,9 +29,14 @@ function Home() {
   // Estado para el filtro: 'upcoming' o 'past'
   const [filter, setFilter] = useState('upcoming');
 
-  useEffect(() => {
-    dispatch(getRentals());
-}, []);
+//   useEffect(() => {
+//     dispatch(getRentals());
+// }, []);
+
+useEffect(() => {
+  dispatch(getRentals());
+// },[dispatch]); 
+},[]); 
 
 
   const sortedRentals = [...rentals].sort((a, b) => { //Al hacer [...rentals] creas un nuevo arreglo con los mismos elementos, y luego lo ordenas sin afectar directamente el estado que maneja Redux.
@@ -79,7 +84,6 @@ function Home() {
     navigate(`/details/${event.id}`); // Navegar a los detalles del alquiler
   };
 
-  
   
   const handleSelectSlot = (slotInfo) => {
     if (!slotInfo?.start) return;
