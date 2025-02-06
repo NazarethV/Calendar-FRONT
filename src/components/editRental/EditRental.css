@@ -35,7 +35,7 @@
     box-sizing: border-box;
   }
 
-  /* Agregar resize vertical para textarea */
+
 .edit-rental-container form textarea {
   resize: vertical;
 }
