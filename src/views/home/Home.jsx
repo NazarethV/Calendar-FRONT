@@ -5,9 +5,11 @@ import { es } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Home.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
+//import { getRentals } from '../../redux/actions/actions'; // Acción para obtener alquileres
+import { getRentals } from '../../redux/actions/rentalActions'
 import { useNavigate } from 'react-router-dom'; // Para navegar a la vista de detalles del alquiler
 import CustomDateHeader from './CustomDateHeader';
+import LogoutButton from "../../components/logout/LogoutButton";
 
 const locales = {
   es: es, // Localizador para fecha en español (porq o sino era en ingkes)
@@ -28,10 +30,6 @@ function Home() {
 
   // Estado para el filtro: 'upcoming' o 'past'
   const [filter, setFilter] = useState('upcoming');
-
-//   useEffect(() => {
-//     dispatch(getRentals());
-// }, []);
 
 useEffect(() => {
   dispatch(getRentals());
@@ -168,6 +166,8 @@ useEffect(() => {
   return (
     <div className="calendar-container">
       <h1>Calendario de Alquileres</h1>
+
+      <LogoutButton />
     
       <div className="calendar">
         <Calendar

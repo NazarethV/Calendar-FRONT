@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRentalById, updateRental } from '../../redux/actions/actions';
+import { getRentalById, updateRental } from '../../redux/actions/rentalActions';
 import './EditRental.css'; 
 
 function EditRental() {
