@@ -13,7 +13,7 @@ function NewRental({ selectedDate }) {
   const [startDate, setStartDate] = useState(selectedDate || '');
   const [endDate, setEndDate] = useState(selectedDate || '');
   const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
+  // const [checkOutTime, setCheckOutTime] = useState('');
   const [details, setDetails] = useState('');
   
   const navigate = useNavigate();
@@ -26,15 +26,10 @@ function NewRental({ selectedDate }) {
       price: parseFloat(price), // Convierte a número
       deposit: deposit ? parseFloat(deposit) : null,
       phoneNumber,
-
-      // startDate: new Date(startDate + "T00:00:00").toISOString().split("T")[0], 
-      // endDate: new Date(endDate + "T00:00:00").toISOString().split("T")[0], 
-  
       startDate,
       endDate, 
-    
       checkInTime: checkInTime ? checkInTime : null,
-      checkOutTime: checkOutTime ? checkOutTime : null,
+      // checkOutTime: checkOutTime ? checkOutTime : null,
       details, 
     };
 
@@ -114,14 +109,14 @@ function NewRental({ selectedDate }) {
             onChange={(e) => setCheckInTime(e.target.value)}
           />
         </label>
-        <label>
+        {/* <label>
           Hora de salida (opcional):
           <input
             type="time"
             value={checkOutTime}
             onChange={(e) => setCheckOutTime(e.target.value)}
           />
-        </label>
+        </label> */}
         <label>
           Detalles (opcional):
           <textarea
