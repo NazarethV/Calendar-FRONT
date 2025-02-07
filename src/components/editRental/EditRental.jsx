@@ -17,7 +17,7 @@ function EditRental() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
+  // const [checkOutTime, setCheckOutTime] = useState('');
   const [details, setDetails] = useState('');
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function EditRental() {
       setStartDate(rental.startDate);
       setEndDate(rental.endDate);
       setCheckInTime(rental.checkInTime);
-      setCheckOutTime(rental.checkOutTime);
+      // setCheckOutTime(rental.checkOutTime);
       setDetails(rental.details || '');
     }
   }, [rental]);
@@ -48,7 +48,7 @@ function EditRental() {
       startDate, 
       endDate, 
       checkInTime, 
-      checkOutTime, 
+      // checkOutTime, 
       details 
     };
     dispatch(updateRental(id, updatedRental));
@@ -121,14 +121,14 @@ function EditRental() {
             onChange={(e) => setCheckInTime(e.target.value)}
           />
         </label>
-        <label>
+        {/* <label>
           Hora de salida (opcional):
           <input
             type="time"
             value={checkOutTime}
             onChange={(e) => setCheckOutTime(e.target.value)}
           />
-        </label>
+        </label> */}
         <label>
           Detalles (opcional):
           <textarea
