@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { deleteRental, getRentalById } from '../../redux/actions/actions';
+import { deleteRental, getRentalById } from '../../redux/actions/rentalActions';
 
 import './Details.css';
 import { format, parseISO } from 'date-fns';

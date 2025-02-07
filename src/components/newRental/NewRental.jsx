@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { createRental } from '../../redux/actions/actions';
+import { createRental } from '../../redux/actions/rentalActions';
 
 import './NewRental.css';
 
