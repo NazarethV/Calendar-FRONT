@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import './LogoutButton.css'
+
 const LogoutButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ const LogoutButton = () => {
     navigate("/login");
   };
 
-  return <button onClick={handleLogout}>Cerrar Sesión</button>;
+  return <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>;
 };
 
 export default LogoutButton;
