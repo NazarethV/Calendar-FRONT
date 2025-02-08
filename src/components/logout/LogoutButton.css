@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.logout-button {
+  background-color: #83AF80;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #6f946b;
+}
+
+/* Responsividad para dispositivos móviles */
+@media screen and (max-width: 480px) {
+  .logout-button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
