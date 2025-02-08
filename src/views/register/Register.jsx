@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
+import './Register.css'
+
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
