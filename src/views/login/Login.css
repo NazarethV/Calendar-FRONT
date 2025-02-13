@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.auth-login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.auth-login-container h2 {
+  text-align: center;
+  color: #2E7D32;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.auth-login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-login-container form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-login-container label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.auth-login-container input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.auth-login-container button {
+  padding: 10px 20px;
+  background-color: #83AF80;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-login-container button:hover {
+  background-color: #6f946b;
+}
+
+.auth-login-container p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-login-container a {
+  color: #2E7D32;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-login-container a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* Responsividad para dispositivos móviles */
+@media screen and (max-width: 480px) {
+  .auth-login-container {
+    padding: 15px 20px;
+    margin: 20px;
+  }
+  .auth-login-container h2 {
+    font-size: 1.5rem;
+  }
+  .auth-login-container input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+  .auth-login-container button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
