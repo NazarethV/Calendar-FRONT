@@ -13,46 +13,44 @@ const Login = () => {
     password: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validate = (name, value) => {
+    let errorMsg = "";
+    if (!value.trim()) errorMsg = "Este campo es obligatorio.";
+    setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+  };
+
   const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+    validate(name, value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (Object.values(errors).some((err) => err)) return;
     await dispatch(login(credentials));
-    // Si el login es exitoso, redirige a Home
     navigate("/home");
   };
 
   return (
-    <div>
+    <div className="auth-login-container">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Usuario:</label>
-          <input
-            type="text"
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="username" value={credentials.username} onChange={handleChange} required />
+          {errors.username && <p className="error">{errors.username}</p>}
         </div>
         <div>
           <label>Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-          />
+          <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
+          {errors.password && <p className="error">{errors.password}</p>}
         </div>
-        <button type="submit">Ingresar</button>
+        <button type="submit" disabled={Object.values(errors).some((err) => err)}>Ingresar</button>
       </form>
-      <p>
-        ¿No tienes cuenta? <a href="/register">Regístrate aquí</a>
-      </p>
+      <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
     </div>
   );
 };

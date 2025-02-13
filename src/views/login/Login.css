@@ -73,7 +73,11 @@
 }
 
 
-
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 3px;
+}
 
 /* Responsividad para dispositivos móviles */
 @media screen and (max-width: 480px) {
