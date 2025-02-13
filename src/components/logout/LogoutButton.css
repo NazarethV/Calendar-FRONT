@@ -13,11 +13,11 @@
 
 .logout-menu {
   position: absolute;
-  top: 30px;
-  left: 0;
+  top: 45px;
+  right: 0;
   background: white;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   padding: 5px;
   width: 120px;
@@ -37,14 +37,17 @@
   background: darkred;
 }
 
+
 /* 📱 Estilos para móviles */
 @media screen and (max-width: 600px) {
   .logout-container {
-    top: 5px;
-    left: 5px;
+    top: 9px; /*5px*/
+    /*left: 8px; /*5px*/
+    right: 8;
+
   }
   .logout-icon {
-    font-size: 18px;
+    font-size: 20px; /*18px*/
   }
   .logout-menu {
     width: 100px;
