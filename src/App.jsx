@@ -5,12 +5,12 @@ import NewRental from './components/newRental/NewRental';
 import EditRental from './components/editRental/EditRental';
 import Login from './views/login/Login';
 import Register from './views/register/Register';
+import LogoutButton from "./components/logout/LogoutButton";
 
 function App() {
 
   return (
     <div>
-
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

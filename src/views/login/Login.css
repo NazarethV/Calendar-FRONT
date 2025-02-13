@@ -72,6 +72,9 @@
   text-decoration: underline;
 }
 
+
+
+
 /* Responsividad para dispositivos móviles */
 @media screen and (max-width: 480px) {
   .auth-login-container {
