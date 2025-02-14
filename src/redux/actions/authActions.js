@@ -8,10 +8,18 @@ export const login = (credentials) => async (dispatch) => {
     const response = await axios.post(`${API_URL}/login`, credentials);
     // Almacena el token en localStorage
     localStorage.setItem("token", response.data.token);
-    dispatch({ type: "LOGIN_SUCCESS", payload: response.data.token });
+
+    dispatch({ 
+      type: "LOGIN_SUCCESS", 
+      payload: response.data.token 
+    });
+  
   } catch (error) {
     console.error("Error en login:", error);
-    dispatch({ type: "LOGIN_FAILURE", payload: error.response?.data?.message || error.message });
+    dispatch({ 
+      type: "LOGIN_FAILURE", 
+      payload: error.response?.data?.message || error.message });
+    throw new Error(error.response?.data?.message || error.message);
   }
 };
 
