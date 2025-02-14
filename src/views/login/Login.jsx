@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
@@ -8,12 +9,16 @@ import './Login.css'
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
+
+  //const { error } = useSelector((state) => state.auth || {}); 
+  const error = useSelector((state) => state.error || null);
 
   const validate = (name, value) => {
     let errorMsg = "";
@@ -30,8 +35,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.values(errors).some((err) => err)) return;
-    await dispatch(login(credentials));
-    navigate("/home");
+
+    try{
+      await dispatch(login(credentials));
+      navigate("/home");
+    }catch(error){
+      //ERROR
+    }
+    
   };
 
   return (
@@ -50,6 +61,9 @@ const Login = () => {
         </div>
         <button type="submit" disabled={Object.values(errors).some((err) => err)}>Ingresar</button>
       </form>
+
+      {error && <p className="error">{error}</p>}
+
       <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
     </div>
   );
